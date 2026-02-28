@@ -4,6 +4,71 @@
 const header = document.getElementById('header');
 const floatingCta = document.getElementById('floatingCta');
 
+// Function to check and update floating CTA visibility
+function updateFloatingCtaVisibility() {
+    const interactiveSection = document.getElementById('interactive');
+    const heroSection = document.querySelector('.hero');
+
+    if (interactiveSection && heroSection) {
+        const interactiveRect = interactiveSection.getBoundingClientRect();
+        const heroRect = heroSection.getBoundingClientRect();
+
+        // Check if interactive section is in viewport
+        const isInteractiveInView = interactiveRect.top < window.innerHeight && interactiveRect.bottom > 0;
+
+        // Check if past hero section
+        const isPastHero = heroRect.bottom < 0;
+
+        if (isInteractiveInView) {
+            floatingCta.classList.remove('visible');
+        } else if (isPastHero) {
+            floatingCta.classList.add('visible');
+        } else {
+            floatingCta.classList.remove('visible');
+        }
+    }
+}
+
+// Scrollspy functionality
+function updateActiveNavLink() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
+    const headerHeight = header.offsetHeight;
+    const scrollPosition = window.scrollY + headerHeight + 100;
+
+    // If at top of page, activate home link
+    if (window.scrollY < 100) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const homeLink = document.querySelector('.nav-link[href="#hero"]');
+        if (homeLink) homeLink.classList.add('active');
+        return;
+    }
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            // Group diagnosis and solution-process under "落地定位"
+            if (sectionId === 'diagnosis' || sectionId === 'solution-process') {
+                const diagnosisLink = document.querySelector('.nav-link[href="#diagnosis"]');
+                if (diagnosisLink) diagnosisLink.classList.add('active');
+            } else {
+                const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+                if (activeLink) activeLink.classList.add('active');
+            }
+        }
+    });
+}
+
+// Set initial active state on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateActiveNavLink();
+});
+
 window.addEventListener('scroll', () => {
     const scrollPosition = window.scrollY;
 
@@ -14,13 +79,11 @@ window.addEventListener('scroll', () => {
         header.classList.remove('scrolled');
     }
 
-    // Show floating CTA after scrolling past hero section
-    const heroHeight = document.querySelector('.hero').offsetHeight;
-    if (scrollPosition > heroHeight - 200) {
-        floatingCta.classList.add('visible');
-    } else {
-        floatingCta.classList.remove('visible');
-    }
+    // Update floating CTA visibility
+    updateFloatingCtaVisibility();
+
+    // Update active nav link
+    updateActiveNavLink();
 });
 
 // ===================================
@@ -35,13 +98,24 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-            const headerHeight = header.offsetHeight;
-            const targetPosition = targetElement.offsetTop - headerHeight;
+            // Hide floating CTA immediately if going to interactive section
+            if (targetId === '#interactive') {
+                floatingCta.classList.remove('visible');
+            }
+
+            // 手动计算精确滚动位置（scroll-padding-top已设为0，完全由JS控制）
+            const header = document.querySelector('.header');
+            const headerHeight = header ? header.offsetHeight : 98;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = targetPosition - headerHeight + 25;  // 加25px让section向上移动消除gap
 
             window.scrollTo({
-                top: targetPosition,
+                top: offsetPosition,
                 behavior: 'smooth'
             });
+
+            // Update floating CTA after scroll completes
+            setTimeout(updateFloatingCtaVisibility, 800);
 
             // Close mobile menu if open
             const nav = document.getElementById('nav');
@@ -92,111 +166,6 @@ tabButtons.forEach(button => {
     });
 });
 
-// ===================================
-// Deliverables Carousel
-// ===================================
-const carouselTrack = document.querySelector('.carousel-track');
-const carouselPrev = document.querySelector('.carousel-prev');
-const carouselNext = document.querySelector('.carousel-next');
-const indicators = document.querySelectorAll('.indicator');
-const deliverableCards = document.querySelectorAll('.deliverable-card');
-
-let currentIndex = 0;
-const cardWidth = 350 + 32; // card width + gap
-let autoPlayInterval;
-
-function updateCarousel() {
-    const offset = -currentIndex * cardWidth;
-    carouselTrack.style.transform = `translateX(${offset}px)`;
-
-    // Update indicators
-    indicators.forEach((indicator, index) => {
-        if (index === currentIndex) {
-            indicator.classList.add('active');
-        } else {
-            indicator.classList.remove('active');
-        }
-    });
-}
-
-function nextSlide() {
-    currentIndex = (currentIndex + 1) % deliverableCards.length;
-    updateCarousel();
-}
-
-function prevSlide() {
-    currentIndex = (currentIndex - 1 + deliverableCards.length) % deliverableCards.length;
-    updateCarousel();
-}
-
-function goToSlide(index) {
-    currentIndex = index;
-    updateCarousel();
-}
-
-// Event listeners for carousel controls
-carouselNext.addEventListener('click', () => {
-    nextSlide();
-    resetAutoPlay();
-});
-
-carouselPrev.addEventListener('click', () => {
-    prevSlide();
-    resetAutoPlay();
-});
-
-indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => {
-        goToSlide(index);
-        resetAutoPlay();
-    });
-});
-
-// Auto-play functionality
-function startAutoPlay() {
-    autoPlayInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
-}
-
-function stopAutoPlay() {
-    clearInterval(autoPlayInterval);
-}
-
-function resetAutoPlay() {
-    stopAutoPlay();
-    startAutoPlay();
-}
-
-// Start auto-play on page load
-startAutoPlay();
-
-// Pause auto-play when hovering over carousel
-const carouselWrapper = document.querySelector('.carousel-wrapper');
-carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
-carouselWrapper.addEventListener('mouseleave', startAutoPlay);
-
-// ===================================
-// Responsive Carousel Adjustment
-// ===================================
-function adjustCarouselForViewport() {
-    const viewportWidth = window.innerWidth;
-
-    if (viewportWidth <= 768) {
-        // Mobile: card width 280px + gap 32px
-        cardWidth = 280 + 32;
-    } else if (viewportWidth <= 1024) {
-        // Tablet: card width 350px + gap 32px
-        cardWidth = 350 + 32;
-    } else {
-        // Desktop: card width 350px + gap 32px
-        cardWidth = 350 + 32;
-    }
-
-    updateCarousel();
-}
-
-// Adjust on load and resize
-window.addEventListener('load', adjustCarouselForViewport);
-window.addEventListener('resize', adjustCarouselForViewport);
 
 // ===================================
 // Copy to Clipboard (WeChat ID)
@@ -261,11 +230,38 @@ const observer = new IntersectionObserver((entries) => {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Training website loaded successfully!');
 
-    // Set initial carousel position
-    updateCarousel();
-
     // Observe all reveal elements
     document.querySelectorAll('.reveal, .reveal-right, .reveal-left, .reveal-scale').forEach(el => {
         observer.observe(el);
     });
+
+    // Set dynamic copyright year
+    const yearElement = document.getElementById('currentYear');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+
+    // Update floating CTA visibility on load
+    updateFloatingCtaVisibility();
+
+    // Observe interactive section for nav minimization
+    const interactiveSection = document.getElementById('interactive');
+    const navCta = document.querySelector('.nav-cta');
+    if (interactiveSection && navCta) {
+        const interactiveObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    header.classList.add('nav-minimal');
+                    navCta.textContent = '返回首页';
+                    navCta.setAttribute('href', '#hero');
+                } else {
+                    header.classList.remove('nav-minimal');
+                    navCta.textContent = '15分钟诊断：定位您的落地路径';
+                    navCta.setAttribute('href', '#interactive');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        interactiveObserver.observe(interactiveSection);
+    }
 });

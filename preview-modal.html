@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交付物预览 - Pallas Studio</title>
+    <style>
+        /* ========== 基础样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #F8FAFC;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 演示按钮 */
+        .demo-button {
+            background: #E8C547;
+            color: #0D1117;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 14px 32px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(232, 197, 71, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .demo-button:hover {
+            background: #D4B13E;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(232, 197, 71, 0.4);
+        }
+
+        /* ========== 模态弹窗遮罩 ========== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* ========== 弹窗主容器 ========== */
+        .modal-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            max-width: 960px;
+            width: 100%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95);
+            transition: transform 0.15s ease;
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
+        }
+
+        /* ========== 顶部标题栏 ========== */
+        .modal-header {
+            height: 48px;
+            background: #0D1117;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            flex-shrink: 0;
+        }
+
+        .modal-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-title {
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .modal-badge {
+            background: rgba(232, 197, 71, 0.15);
+            color: #E8C547;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .modal-close {
+            color: white;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            color: #E8C547;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ========== 主体内容区 ========== */
+        .modal-body {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* ========== 左侧导航 ========== */
+        .modal-sidebar {
+            width: 240px;
+            background: #F8FAFC;
+            border-right: 1px solid #E2E8F0;
+            padding: 16px;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .nav-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-card:hover {
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-card.active {
+            border-left: 3px solid #E8C547;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-card-icon {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .nav-card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0F172A;
+            margin-bottom: 4px;
+        }
+
+        .nav-card-desc {
+            font-size: 11px;
+            color: #64748B;
+            line-height: 1.4;
+        }
+
+        /* 样例背景信息框 */
+        .sample-info {
+            background: #FFFDF5;
+            border: 1px solid rgba(232, 197, 71, 0.2);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 11px;
+            color: #64748B;
+            margin-top: 16px;
+            line-height: 1.6;
+        }
+
+        .sample-info-title {
+            font-weight: 600;
+            color: #0F172A;
+            margin-bottom: 6px;
+        }
+
+        .sample-info-divider {
+            border-top: 1px solid rgba(232, 197, 71, 0.15);
+            margin: 8px 0;
+        }
+
+        /* ========== 右侧内容区 ========== */
+        .modal-content {
+            flex: 1;
+            background: #FFFFFF;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        /* 文档预览容器 */
+        .doc-preview-container {
+            background: #F1F5F9;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* 模拟文档页面 */
+        .doc-page {
+            background: white;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border-radius: 4px;
+            padding: 32px;
+            position: relative;
+            min-height: 500px;
+        }
+
+        /* 水印 */
+        .doc-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 72px;
+            font-weight: 700;
+            color: rgba(0, 0, 0, 0.03);
+            white-space: nowrap;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* 文档标题 */
+        .doc-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0F172A;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #E8C547;
+        }
+
+        /* 文档底部标识 */
+        .doc-footer {
+            margin-top: 24px;
+            padding-top: 12px;
+            border-top: 1px solid #E2E8F0;
+            font-size: 10px;
+            color: #94A3B8;
+            text-align: center;
+        }
+
+        /* ========== AI项目画布网格 ========== */
+        .canvas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .canvas-cell {
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            padding: 16px;
+            background: #F8FAFC;
+            min-height: 120px;
+        }
+
+        .canvas-cell-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0F172A;
+            margin-bottom: 8px;
+        }
+
+        .canvas-cell-content {
+            font-size: 11px;
+            color: #64748B;
+            line-height: 1.5;
+        }
+
+        .canvas-cell.blurred .canvas-cell-content {
+            filter: blur(5px);
+            user-select: none;
+        }
+
+        /* ========== 标注气泡系统 ========== */
+        .annotation {
+            position: absolute;
+            z-index: 10;
+        }
+
+        .annotation-pin {
+            width: 12px;
+            height: 12px;
+            background: #22C55E;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        /* 紫色标注（AI特有机制） */
+        .annotation-pin.purple {
+            background: #7C3AED;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.3);
+            animation: pulsePurple 3s infinite;
+        }
+
+        @keyframes pulsePurple {
+            0%, 100% {
+                box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 0 6px rgba(124, 58, 237, 0.1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.1);
+            }
+        }
+
+        .annotation-line {
+            position: absolute;
+            border-left: 1px dashed #22C55E;
+            /* === 优化项5：hover交互 === */
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .annotation-label {
+            background: #0F172A;
+            color: white;
+            font-size: 11px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            max-width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            line-height: 1.4;
+            /* === 优化项5：hover交互 === */
+            opacity: 0;
+            transform: translateY(4px);
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        /* === 优化项5：hover交互状态 === */
+        .annotation-pin:hover + .annotation-line,
+        .annotation-pin:hover ~ .annotation-label {
+            opacity: 1;
+        }
+
+        .annotation-pin:hover ~ .annotation-label {
+            transform: translateY(0);
+        }
+
+        .annotation-pin:hover {
+            animation-play-state: paused;
+        }
+
+        /* 自动展示类（首次引导） */
+        .annotation-pin.auto-reveal + .annotation-line,
+        .annotation-pin.auto-reveal ~ .annotation-label {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 触屏设备适配 */
+        @media (hover: none) {
+            .annotation-pin:active + .annotation-line,
+            .annotation-pin:active ~ .annotation-label,
+            .annotation-pin:focus + .annotation-line,
+            .annotation-pin:focus ~ .annotation-label {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== 底部行动栏 ========== */
+        .modal-footer {
+            height: 60px;
+            background: #F8FAFC;
+            border-top: 1px solid #E2E8F0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            flex-shrink: 0;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #64748B;
+            max-width: 500px;
+        }
+
+        .footer-cta {
+            background: #E8C547;
+            color: #0D1117;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 24px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .footer-cta:hover {
+            background: #D4B13E;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(232, 197, 71, 0.3);
+        }
+
+        /* ========== 90天路线图样式 ========== */
+        .roadmap-timeline {
+            margin: 20px 0;
+        }
+
+        .roadmap-phase {
+            margin-bottom: 24px;
+            padding: 16px;
+            background: #F8FAFC;
+            border-left: 4px solid #E8C547;
+            border-radius: 6px;
+        }
+
+        .roadmap-phase-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0F172A;
+            margin-bottom: 12px;
+        }
+
+        .roadmap-milestones {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .roadmap-milestone {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: #64748B;
+        }
+
+        .roadmap-milestone-dot {
+            width: 8px;
+            height: 8px;
+            background: #22C55E;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .roadmap-phase.blurred {
+            filter: blur(4px);
+            user-select: none;
+        }
+
+        /* ========== 第一周清单样式 ========== */
+        .checklist-items {
+            margin: 20px 0;
+        }
+
+        .checklist-item {
+            display: grid;
+            grid-template-columns: 80px 1fr 100px 120px;
+            gap: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .checklist-day {
+            font-weight: 600;
+            color: #0F172A;
+        }
+
+        .checklist-task {
+            color: #64748B;
+        }
+
+        .checklist-owner {
+            color: #64748B;
+        }
+
+        .checklist-output {
+            color: #64748B;
+        }
+
+        .checklist-item.blurred {
+            filter: blur(4px);
+            user-select: none;
+        }
+
+        .checklist-item.highlight {
+            background: #FFFDF5;
+            border-color: #E8C547;
+        }
+
+        /* ========== 响应式样式 ========== */
+        @media (max-width: 768px) {
+            .modal-body {
+                flex-direction: column;
+            }
+
+            .modal-sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #E2E8F0;
+                padding: 12px;
+            }
+
+            .nav-card {
+                display: inline-block;
+                width: calc(33.33% - 8px);
+                margin-right: 8px;
+                margin-bottom: 8px;
+                vertical-align: top;
+            }
+
+            .sample-info {
+                display: none;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+                height: auto;
+                padding: 16px;
+                gap: 12px;
+            }
+
+            .footer-text {
+                text-align: center;
+            }
+
+            .checklist-item {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .canvas-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 演示按钮 -->
+    <button class="demo-button" onclick="openPreviewModal()">
+        👁️ 预览真实样例（打码）
+    </button>
+
+    <!-- 模态弹窗 -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+        <div class="modal-container" onclick="event.stopPropagation()">
+            <!-- 顶部标题栏 -->
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <span class="modal-title">真实交付样例预览</span>
+                    <span class="modal-badge">Pallas Studio™ 内部资料</span>
+                </div>
+                <button class="modal-close" onclick="closePreviewModal()">&times;</button>
+            </div>
+
+            <!-- 主体内容 -->
+            <div class="modal-body">
+                <!-- 左侧导航 -->
+                <div class="modal-sidebar">
+                    <div class="nav-card active" data-doc="canvas" onclick="switchDocument('canvas')">
+                        <div class="nav-card-icon">📋</div>
+                        <div class="nav-card-title">AI 项目画布</div>
+                        <div class="nav-card-desc">锁定高价值场景与量化ROI</div>
+                    </div>
+                    <div class="nav-card" data-doc="roadmap" onclick="switchDocument('roadmap')">
+                        <div class="nav-card-icon">🗓️</div>
+                        <div class="nav-card-title">90天行动路线图</div>
+                        <div class="nav-card-desc">明确关键里程碑与验收标准</div>
+                    </div>
+                    <div class="nav-card" data-doc="checklist" onclick="switchDocument('checklist')">
+                        <div class="nav-card-icon">✅</div>
+                        <div class="nav-card-title">第一周启动清单</div>
+                        <div class="nav-card-desc">消除从共识到执行的真空期</div>
+                    </div>
+
+                    <!-- 样例背景信息 -->
+                    <div class="sample-info">
+                        <div class="sample-info-title">📋 样例背景</div>
+                        <div>某消费品企业（体系构建期）</div>
+                        <div>综合评分：3.2 / 5.0</div>
+                        <div>核心痛点：战略清晰度不足（2.3分），技术链路不通</div>
+                        <div class="sample-info-divider"></div>
+                        <div>✅ 方案产出后</div>
+                        <div>成功跑通1个最小闭环场景，验证了数据可用性</div>
+                    </div>
+                </div>
+
+                <!-- 右侧内容区 - 待添加 -->
+                <div class="modal-content" id="modalContent">
+                    <!-- 文档预览内容将在这里动态加载 -->
+                </div>
+            </div>
+
+            <!-- 底部行动栏 -->
+            <div class="modal-footer">
+                <div class="footer-text">
+                    这只是90天中的第一步。在现场，您将带走属于您企业的定制化版本。
+                </div>
+                <button class="footer-cta" onclick="window.location.href='#interactive'">
+                    立即预约工作坊
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== 弹窗控制 ==========
+        function openPreviewModal() {
+            const overlay = document.getElementById('modalOverlay');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // 默认加载第一个文档
+            switchDocument('canvas');
+        }
+
+        function closePreviewModal() {
+            const overlay = document.getElementById('modalOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeModalOnOverlay(event) {
+            if (event.target === event.currentTarget) {
+                closePreviewModal();
+            }
+        }
+
+        // ESC键关闭
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePreviewModal();
+            }
+        });
+
+        // === 优化项5：首次引导 - 自动展示第一个标注 ===
+        function autoRevealFirstAnnotation() {
+            setTimeout(() => {
+                const firstPin = document.querySelector('.annotation-pin');
+                if (firstPin) {
+                    firstPin.classList.add('auto-reveal');
+                    setTimeout(() => firstPin.classList.remove('auto-reveal'), 3000);
+                }
+            }, 1500);
+        }
+
+        // 监听弹窗打开事件
+        const originalOpenPreview = openPreviewModal;
+        openPreviewModal = function() {
+            originalOpenPreview();
+            autoRevealFirstAnnotation();
+        };
+
+        // ========== 文档切换 ==========
+        function switchDocument(docType) {
+            // 更新导航卡片状态
+            document.querySelectorAll('.nav-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.querySelector(`[data-doc="${docType}"]`).classList.add('active');
+
+            // 加载对应文档内容
+            const content = document.getElementById('modalContent');
+            content.innerHTML = getDocumentContent(docType);
+        }
+
+        // ========== 文档内容生成 ==========
+        function getDocumentContent(docType) {
+            switch(docType) {
+                case 'canvas':
+                    return getCanvasContent();
+                case 'roadmap':
+                    return getRoadmapContent();
+                case 'checklist':
+                    return getChecklistContent();
+                default:
+                    return '';
+            }
+        }
+
+        // AI 项目画布内容
+        function getCanvasContent() {
+            return `
+                <div class="doc-preview-container">
+                    <div class="doc-page">
+                        <div class="doc-watermark">Pallas Studio</div>
+
+                        <div class="doc-title">A3 | AI 项目画布（六要素 + ROI口径）</div>
+
+                        <div class="canvas-grid">
+                            <div class="canvas-cell">
+                                <div class="canvas-cell-title">业务价值</div>
+                                <div class="canvas-cell-content">
+                                    基于《AI成熟度评估》锁定的 Top3 经营判断场景：<br>
+                                    1. 销售预测准确率提升（当前65% → 目标85%）<br>
+                                    2. 库存周转优化（减少20%积压）<br>
+                                    3. 客户流失预警（提前30天识别）
+                                </div>
+                            </div>
+
+                            <div class="canvas-cell blurred">
+                                <div class="canvas-cell-title">数据准备</div>
+                                <div class="canvas-cell-content">
+                                    数据源清单与质量评估<br>
+                                    主数据治理方案<br>
+                                    数据接入时间表<br>
+                                    质量红线与熔断规则
+                                </div>
+                            </div>
+
+                            <div class="canvas-cell blurred">
+                                <div class="canvas-cell-title">技术选择</div>
+                                <div class="canvas-cell-content">
+                                    算法选型与技术栈<br>
+                                    基础设施需求<br>
+                                    第三方服务评估<br>
+                                    技术风险应对
+                                </div>
+                            </div>
+
+                            <div class="canvas-cell blurred">
+                                <div class="canvas-cell-title">团队配置</div>
+                                <div class="canvas-cell-content">
+                                    核心角色与编制<br>
+                                    能力缺口分析<br>
+                                    培训计划<br>
+                                    外部资源需求
+                                </div>
+                            </div>
+
+                            <div class="canvas-cell">
+                                <div class="canvas-cell-title">ROI口径</div>
+                                <div class="canvas-cell-content">
+                                    <strong>财务叙事：</strong>年节省成本约800万元<br>
+                                    <strong>业务叙事：</strong>销售预测准确率提升20个百分点<br>
+                                    <strong>战略叙事：</strong>建立数据驱动决策能力，支撑3年数字化转型
+                                </div>
+                            </div>
+
+                            <div class="canvas-cell blurred">
+                                <div class="canvas-cell-title">风险应对</div>
+                                <div class="canvas-cell-content">
+                                    数据质量风险<br>
+                                    组织变革阻力<br>
+                                    技术实施风险<br>
+                                    合规与安全风险<br>
+                                    <br>
+                                    <span style="filter: blur(2px);">
+                                        <strong>Agent 自主决策边界：</strong><br>
+                                        明确哪些决策 Agent 可自主执行（如常规补货），<br>
+                                        哪些必须人工确认（如超过阈值的大额采购）。
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-footer">Pallas Studio · A3模板 · 预览样例</div>
+
+                        <!-- 标注气泡 -->
+                        <div class="annotation" style="top: 140px; left: 50px;">
+                            <div class="annotation-pin"></div>
+                            <div class="annotation-line" style="height: 40px; left: 6px;"></div>
+                            <div class="annotation-label" style="position: absolute; top: 50px; left: -80px;">
+                                基于《AI成熟度评估》锁定的 Top3 经营判断场景
+                            </div>
+                        </div>
+
+                        <div class="annotation" style="bottom: 180px; right: 100px;">
+                            <div class="annotation-pin"></div>
+                            <div class="annotation-line" style="height: 40px; left: 6px;"></div>
+                            <div class="annotation-label" style="position: absolute; top: 50px; left: -150px;">
+                                含财务/业务/战略三种叙事，可直接用于董事会汇报
+                            </div>
+                        </div>
+
+                        <div class="annotation" style="top: 200px; right: 50px;">
+                            <div class="annotation-pin"></div>
+                            <div class="annotation-line" style="height: 40px; left: 6px;"></div>
+                            <div class="annotation-label" style="position: absolute; top: 50px; left: -180px;">
+                                具体技术选型与团队配置方案（现场定制）
+                            </div>
+                        </div>
+
+                        <!-- 紫色标注：Agent 决策边界 -->
+                        <div class="annotation" style="bottom: 140px; right: 80px;">
+                            <div class="annotation-pin purple"></div>
+                            <div class="annotation-line" style="height: 40px; left: 6px;"></div>
+                            <div class="annotation-label" style="position: absolute; top: 50px; left: -200px;">
+                                这就是 Agentic AI 的'护栏设计'——不是让 AI 什么都做，而是明确'什么能自己决定、什么必须喊人'
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 90天行动路线图内容
+        function getRoadmapContent() {
+            return `
+                <div class="doc-preview-container">
+                    <div class="doc-page">
+                        <div class="doc-watermark">Pallas Studio</div>
+
+                        <div class="doc-title">90天行动路线图（含验收标准）</div>
+
+                        <div class="roadmap-timeline">
+                            <div class="roadmap-phase">
+                                <div class="roadmap-phase-title">第1个月：数据准备 + 快速验证</div>
+                                <div class="roadmap-milestones">
+                                    <div class="roadmap-milestone">
+                                        <div class="roadmap-milestone-dot"></div>
+                                        <div>Week 1-2：完成数据源盘点与质量评估，输出《数据资产清单》</div>
+                                    </div>
+                                    <div class="roadmap-milestone">
+                                        <div class="roadmap-milestone-dot"></div>
+                                        <div>Week 3：搭建最小数据管道，验证数据可用性（验收：成功跑通1个场景）</div>
+                                    </div>
+                                    <div class="roadmap-milestone">
+                                        <div class="roadmap-milestone-dot"></div>
+                                        <div>Week 4：完成算法原型开发，输出初步预测结果（准确率基线）</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="roadmap-phase blurred">
+                                <div class="roadmap-phase-title">第2个月：试点上线 + 效果评估</div>
+                                <div class="roadmap-milestones">
+                                    <div class="roadmap-milestone">
+                                        <div class="roadmap-milestone-dot"></div>
+                                        <div>Week 5-6：在1-2个业务单元试点部署</div>
+                                    </div>
+                                    <div class="roadmap-milestone">
+                                        <div class="roadmap-milestone-dot"></div>
+                                        <div>Week 7：收集业务反馈，优化模型参数</div>
+                                    </div>
+                                    <div class="roadmap-milestone">
+                                        <div class="roadmap-milestone-dot"></div>
+                                        <div>Week 8：输出《试点效果评估报告》</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="roadmap-phase blurred">
+                                <div class="roadmap-phase-title">第3个月：优化迭代 + 规模化准备</div>
+                                <div class="roadmap-milestones">
+                                    <div class="roadmap-milestone">
+                                        <div class="roadmap-milestone-dot"></div>
+                                        <div>Week 9-10：根据反馈优化算法与流程</div>
+                                    </div>
+                                    <div class="roadmap-milestone">
+                                        <div class="roadmap-milestone-dot"></div>
+                                        <div>Week 11：制定规模化推广方案</div>
+                                    </div>
+                                    <div class="roadmap-milestone">
+                                        <div class="roadmap-milestone-dot"></div>
+                                        <div>Week 12：向管理层汇报成果与下一步计划</div>
+                                    </div>
+                                    <div class="roadmap-milestone" style="margin-top: 12px; padding: 10px; background: rgba(124, 58, 237, 0.04); border-radius: 6px; border-left: 3px solid #7C3AED;">
+                                        <div style="font-weight: 600; color: #7C3AED; margin-bottom: 6px;">Week 11-12 验收：</div>
+                                        <div style="font-size: 11px; line-height: 1.6;">
+                                            • Agent 自主决策准确率 ≥ <span class="v2-mask-heavy">██</span>%（打码）<br>
+                                            • 人工干预率降至 ≤ <span class="v2-mask-heavy">██</span>%（打码）<br>
+                                            • 熔断机制触发测试通过 ✓
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-footer">Pallas Studio · 路线图模板 · 预览样例</div>
+
+                        <!-- 标注气泡 -->
+                        <div class="annotation" style="top: 160px; left: 60px;">
+                            <div class="annotation-pin"></div>
+                            <div class="annotation-line" style="height: 40px; left: 6px;"></div>
+                            <div class="annotation-label" style="position: absolute; top: 50px; left: -100px;">
+                                2-4周最小闭环验证，确保数据链路可用
+                            </div>
+                        </div>
+
+                        <div class="annotation" style="top: 200px; right: 80px;">
+                            <div class="annotation-pin"></div>
+                            <div class="annotation-line" style="height: 40px; left: 6px;"></div>
+                            <div class="annotation-label" style="position: absolute; top: 50px; left: -160px;">
+                                每个里程碑均含可量化的验收标准
+                            </div>
+                        </div>
+
+                        <div class="annotation" style="bottom: 200px; left: 60px;">
+                            <div class="annotation-pin"></div>
+                            <div class="annotation-line" style="height: 40px; left: 6px;"></div>
+                            <div class="annotation-label" style="position: absolute; top: 50px; left: -120px;">
+                                包含季度级 ROI 预估与落地节奏安排
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 第一周启动清单内容
+        function getChecklistContent() {
+            return `
+                <div class="doc-preview-container">
+                    <div class="doc-page">
+                        <div class="doc-watermark">Pallas Studio</div>
+
+                        <div class="doc-title">第一周行动清单（周一至周五）</div>
+
+                        <div class="checklist-items">
+                            <div class="checklist-item">
+                                <div class="checklist-day">周一</div>
+                                <div class="checklist-task">召开项目启动会，对齐目标与验收标准</div>
+                                <div class="checklist-owner">项目经理</div>
+                                <div class="checklist-output">会议纪要 + RACI矩阵</div>
+                            </div>
+
+                            <div class="checklist-item">
+                                <div class="checklist-day">周二</div>
+                                <div class="checklist-task">完成数据源盘点，明确接口人与权限</div>
+                                <div class="checklist-owner">数据负责人</div>
+                                <div class="checklist-output">数据资产清单v1.0</div>
+                            </div>
+
+                            <div class="checklist-item blurred">
+                                <div class="checklist-day">周三</div>
+                                <div class="checklist-task">搭建开发环境，配置基础工具链</div>
+                                <div class="checklist-owner">技术负责人</div>
+                                <div class="checklist-output">环境配置文档</div>
+                            </div>
+
+                            <div class="checklist-item blurred">
+                                <div class="checklist-day">周四</div>
+                                <div class="checklist-task">完成第一个数据管道测试</div>
+                                <div class="checklist-owner">数据工程师</div>
+                                <div class="checklist-output">数据流转验证报告</div>
+                            </div>
+
+                            <div class="checklist-item highlight">
+                                <div class="checklist-day">周五</div>
+                                <div class="checklist-task">向管理层汇报本周进展与下周计划 ✓</div>
+                                <div class="checklist-owner">项目经理</div>
+                                <div class="checklist-output">周报 + 演示材料</div>
+                            </div>
+                        </div>
+
+                        <div class="doc-footer">Pallas Studio · 启动清单模板 · 预览样例</div>
+
+                        <!-- 标注气泡 -->
+                        <div class="annotation" style="top: 140px; left: 60px;">
+                            <div class="annotation-pin"></div>
+                            <div class="annotation-line" style="height: 40px; left: 6px;"></div>
+                            <div class="annotation-label" style="position: absolute; top: 50px; left: -100px;">
+                                将指标口径统一任务拆解至具体责任 Owner
+                            </div>
+                        </div>
+
+                        <div class="annotation" style="bottom: 140px; right: 80px;">
+                            <div class="annotation-pin"></div>
+                            <div class="annotation-line" style="height: 40px; left: 6px;"></div>
+                            <div class="annotation-label" style="position: absolute; top: 50px; left: -150px;">
+                                确保周五产出一个可向管理层展示的初步成果
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

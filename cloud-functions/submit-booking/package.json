@@ -1,0 +1,7 @@
+{
+  "name": "submit-booking",
+  "version": "1.0.0",
+  "dependencies": {
+    "cos-nodejs-sdk-v5": "^2.12.0"
+  }
+}

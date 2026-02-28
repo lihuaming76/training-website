@@ -1,0 +1,28 @@
+# Claude Code 配置
+.claude/
+
+# Node modules
+node_modules/
+
+# 临时文件
+nul
+*.tmp
+tmp-*.png
+
+# 测试文件
+test-*.js
+test-*.md
+
+# 提示词文档（可选：如果不想公开提示词，取消注释）
+# *-prompt.md
+
+# 压缩包
+*.zip
+
+# 示例文件
+Examples/
+
+# 单独的测试页面
+check-header.html
+step2-single-screen.html
+*-preview-modal.html
