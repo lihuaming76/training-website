@@ -2645,8 +2645,9 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid #F3F4F6;
+            padding-bottom: 18px;
+            margin-bottom: 4px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.02);
         }
 
         .case-block:last-of-type {
@@ -3001,6 +3002,118 @@
             .fit-check-closing p {
                 font-size: 14px;
             }
+        }
+
+        /* Step 4 完成页样式 */
+        .completion-subtitle {
+            font-size: 15px;
+            color: #6B7280;
+            text-align: center;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+
+        .step4-focus-section {
+            background: #F9FAFB;
+            border-radius: 8px;
+            padding: 16px 24px;
+            margin: 28px 0;
+        }
+
+        .focus-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 12px;
+        }
+
+        .focus-points {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .focus-point {
+            font-size: 14px;
+            color: #374151;
+            padding-left: 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .focus-point::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #9CA3AF;
+        }
+
+        .step4-prep-section {
+            margin: 32px 0;
+        }
+
+        .prep-section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #F9FAFB;
+            margin-bottom: 18px;
+        }
+
+        .prep-tips {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .prep-tip {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .prep-number {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #E5E7EB;
+            color: #374151;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .prep-content {
+            flex: 1;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .prep-content strong {
+            color: #F9FAFB;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .prep-content span {
+            color: #D1D5DB;
+        }
+
+        .step4-appointment-note {
+            font-size: 12px;
+            color: #9CA3AF;
+            text-align: center;
+            margin-top: 24px;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .prep-card-link {
+            margin-top: 8px;
+            text-align: center;
         }
 
         /* 课程详情和关于讲师 */
@@ -3586,70 +3699,64 @@
                         <span class="progress-seg active"></span>
                     </div>
                     <h2 class="completion-main-title">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="completion-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="completion-icon" style="color: #10B981;">
                             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                             <polyline points="22 4 12 14.01 9 11.01"></polyline>
                         </svg>
-                        预约完成
+                        沟通准备已完成
                     </h2>
-                    <h3 class="step-title">期待与您深度交流</h3>
+                    <p class="completion-subtitle">我们将基于您的选择，准备初步判断框架，用于15分钟诊断对话。</p>
                 </div>
 
-                <div class="step4-two-column">
-                    <div class="step4-left-column">
-                        <p class="step-subtitle">您的诊断对话时间已锁定。在沟通前，建议您简单梳理以下信息，确保15分钟高效利用：</p>
-                        <div class="completion-tips">
-                            <div class="tip-item">
-                                <span class="value-number">①</span>
-                                <div class="tip-content">
-                                    <strong>明确业务挑战：</strong>
-                                    <span>您目前最核心的经营挑战是什么（如增长/合规/降本）</span>
-                                </div>
+                <div class="step4-focus-section">
+                    <h3 class="focus-title">这次沟通将聚焦：</h3>
+                    <div class="focus-points">
+                        <div class="focus-point">您当前最卡的关键断点</div>
+                        <div class="focus-point">更适合的落地切口与优先级</div>
+                        <div class="focus-point">下一步是1天对齐、2天共创，还是先补一块基础条件</div>
+                    </div>
+                </div>
+
+                <div class="step4-prep-section">
+                    <h4 class="prep-section-title">为了让沟通更高效，建议您提前梳理：</h4>
+                    <div class="prep-tips">
+                        <div class="prep-tip">
+                            <span class="prep-number">①</span>
+                            <div class="prep-content">
+                                <strong>明确业务挑战：</strong>
+                                <span>您目前最核心的经营挑战是什么（如增长/合规/降本）</span>
                             </div>
-                            <div class="tip-item">
-                                <span class="value-number">②</span>
-                                <div class="tip-content">
-                                    <strong>提前了解数据现状：</strong>
-                                    <span>企业有哪些系统和数据源，治理程度如何</span>
-                                </div>
+                        </div>
+                        <div class="prep-tip">
+                            <span class="prep-number">②</span>
+                            <div class="prep-content">
+                                <strong>提前了解数据现状：</strong>
+                                <span>企业有哪些系统和数据源，治理程度如何</span>
                             </div>
-                            <div class="tip-item">
-                                <span class="value-number">③</span>
-                                <div class="tip-content">
-                                    <strong>核心决策者：</strong>
-                                    <span>谁会参与决策（CEO/CIO/业务负责人等）</span>
-                                </div>
+                        </div>
+                        <div class="prep-tip">
+                            <span class="prep-number">③</span>
+                            <div class="prep-content">
+                                <strong>核心决策者：</strong>
+                                <span>谁会参与决策（CEO/CIO/业务负责人等）</span>
                             </div>
                         </div>
                     </div>
+                    <p class="step4-appointment-note">
+                        您已在上一步完成预约方式选择（微信或电话）。如需调整，可<button class="btn-back-inline" data-prev="step3" style="color: #9CA3AF; text-decoration: underline; background: none; border: none; padding: 0; cursor: pointer; font-size: inherit;">返回上一步</button>
+                    </p>
+                </div>
 
-                    <div class="step4-right-column">
-                        <div class="pdf-download-section">
-                            <div class="pdf-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                    <polyline points="14 2 14 8 20 8"></polyline>
-                                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                                    <polyline points="10 9 9 9 8 9"></polyline>
-                                </svg>
-                            </div>
-                            <p class="pdf-description">
-                                为了让我们的交流更高效，我们为您准备了一份<strong class="pdf-title">《15分钟高管沟通筹备卡 (PDF)》</strong>。建议您在会前花 3 分钟扫一眼，它将帮助您快速厘清当前的业务卡点。
-                                <a href="#" style="color: #9CA3AF; font-size: 13px; text-decoration: underline; margin-left: 8px;">查看筹备卡</a>
-                            </p>
-                                </div>
-
-                        <div class="completion-promise">
-                            <div class="promise-badges">
+                <div class="completion-promise">
+                    <div class="promise-badges">
                         <span class="promise-badge">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                             </svg>
                             信息严格保密
                         </span>
                         <span class="promise-badge">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <line x1="12" y1="16" x2="12" y2="12"></line>
                                 <line x1="12" y1="8" x2="12.01" y2="8"></line>
@@ -3657,7 +3764,7 @@
                             只提供专业建议
                         </span>
                         <span class="promise-badge">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                                 <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                             </svg>
@@ -3666,11 +3773,6 @@
                     </div>
                 </div>
 
-                        <div class="step4-actions">
-                            <button class="btn btn-primary" onclick="window.location.href='index.html'">返回官网首页</button>
-                        </div>
-                    </div>
-                </div>
                 <p class="step4-closing-message">我们已为您准备好，期待3天内与您开启深度对话。</p>
             </div>
         </div>
@@ -4135,7 +4237,7 @@
                                 <li><strong>产出完整项目画布与详细路线图</strong></li>
                                 <li><strong>深度设计跨部门 RACI 协作机制</strong></li>
                                 <li><strong>详细 ROI 测算 + 三种高管叙事</strong></li>
-                                <li><strong>强制讲师毒舌预演（评审门槛）</strong><br><span style="font-size: 11px; color: #D97706; font-style: italic; margin-top: 4px;">2天版独享：方案必须过'CFO/业务VP/CEO三刀'质询，不过不结课</span></li>
+                                <li><strong>上会压力测试（评审门槛）</strong><br><span style="font-size: 11px; color: #D97706; font-style: italic; margin-top: 4px;">2天版包含：方案必须过'CFO/业务VP/CEO三刀'质询，未达到可立项标准时补充辅导</span></li>
                             </ul>
                         </div>
 
@@ -4189,7 +4291,7 @@
                             <tr>
                                 <td style="background: #F8FAFC; font-weight: 600; color: #0F172A; font-size: 12px; padding: 12px 16px;">风险预演</td>
                                 <td style="font-size: 12px; color: #94A3B8; font-style: italic; padding: 12px 16px;">—</td>
-                                <td style="background: rgba(232,197,71,0.02); font-size: 12px; padding: 12px 16px;"><span style="color: #059669; font-weight: 600;">✅ 讲师毒舌预演（必须通过）</span><br><span style="color: #334155; font-size: 11px;">模拟CFO/VP/CEO三刀质询</span></td>
+                                <td style="background: rgba(232,197,71,0.02); font-size: 12px; padding: 12px 16px;"><span style="color: #059669; font-weight: 600;">✅ 上会压力测试（必须通过）</span><br><span style="color: #334155; font-size: 11px;">模拟CFO/VP/CEO三刀质询</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -4396,26 +4498,6 @@
                         </div>
                     </div>
 
-                    <!-- B4. 适用客户声明 -->
-                    <div class="fit-check">
-                        <div class="fit-column fit-yes">
-                            <div class="fit-header">✅ 适合</div>
-                            <ul>
-                                <li>已在探索/明确AI数据场景，希望快速拉齐高管共识</li>
-                                <li>需要打通跨部门协作机制与责任边界</li>
-                                <li>急需落实业务有价值技术可行的方案推动AI在企业落地</li>
-                            </ul>
-                        </div>
-                        <div class="fit-divider"></div>
-                        <div class="fit-column fit-no">
-                            <div class="fit-header">⛔ 不适合</div>
-                            <ul>
-                                <li>只想听趋势概念课</li>
-                                <li>不愿提前提供场景痛点信息与关键参训角色</li>
-                                <li>没有明确的业务痛点</li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
