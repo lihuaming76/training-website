@@ -443,30 +443,31 @@ button {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 /* 大屏优化：更大间距 */
 @media (min-width: 1280px) {
     .hero-title {
         gap: 1.25rem;
-        margin-bottom: 2.5rem;
+        margin-bottom: 1.25rem;
     }
 }
 
 .hero-title-main {
     font-family: var(--font-display), var(--font-chinese), serif;
-    font-size: 3.5rem;
+    font-size: 3.25rem;
     font-weight: 700;
     line-height: 1.1;
     color: #FFFFFF;
     letter-spacing: -0.02em;
+    white-space: nowrap;
 }
 
 /* 大屏优化：更大字号 */
 @media (min-width: 1280px) {
     .hero-title-main {
-        font-size: 4rem;
+        font-size: 3.75rem;
         line-height: 1.05;
     }
 }
@@ -835,6 +836,8 @@ button {
     border-left: 4px solid var(--color-secondary);
     box-shadow: var(--shadow-soft);
     transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
 }
 
 .diagnosis-card:hover {
@@ -843,24 +846,49 @@ button {
     border-left-width: 8px;
 }
 
-.diagnosis-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 80px;
+.diagnosis-number {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    font-size: 8rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.03);
+    line-height: 1;
+    pointer-events: none;
 }
 
 .diagnosis-title {
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: var(--color-primary);
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
 }
 
-.diagnosis-desc {
+.diagnosis-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+}
+
+.diagnosis-problem {
     color: var(--color-text-light);
     line-height: 1.6;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.diagnosis-help {
+    color: var(--color-text);
+    line-height: 1.6;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
 }
 
 .diagnosis-link {
@@ -3551,6 +3579,108 @@ button {
     background: #f1f5f9;
 }
 
+/* Deliverable Visual Styles */
+.bento-card-value {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+}
+
+.deliverable-visual-canvas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+}
+
+.canvas-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.deliverable-visual-roi {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+}
+
+.roi-module {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+    color: #64748b;
+    text-align: center;
+}
+
+.roi-arrow {
+    color: #94a3b8;
+    font-size: 1rem;
+}
+
+.deliverable-visual-raci {
+    margin: 1.5rem 0;
+}
+
+.raci-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #e2e8f0;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.raci-cell {
+    background: #fff;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.7rem;
+    color: #64748b;
+}
+
+.raci-cell.header {
+    background: #f8fafc;
+    font-weight: 600;
+    color: #475569;
+}
+
+.raci-cell.highlight {
+    background: rgba(232, 197, 71, 0.1);
+    color: #92400e;
+    font-weight: 600;
+}
+
+.deliverable-visual-governance {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+}
+
+.governance-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.governance-label {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
 /* Additional Content Detail for Card 4 */
 .bento-card-content-detail {
     font-size: 0.8rem;
@@ -3898,6 +4028,33 @@ button {
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--color-text-light);
+}
+
+.price-reference {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.price-condition {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    font-style: italic;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.pricing-callout {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(232, 197, 71, 0.05);
+    border-left: 3px solid var(--color-secondary);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    font-style: italic;
 }
 
 .pricing-value-anchor {
