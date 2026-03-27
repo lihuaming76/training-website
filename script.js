@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     navCta.setAttribute('href', '#hero');
                 } else {
                     header.classList.remove('nav-minimal');
-                    navCta.textContent = '15分钟诊断：定位您的落地路径';
+                    navCta.textContent = '预约15分钟诊断对话';
                     navCta.setAttribute('href', '#interactive');
                 }
             });
