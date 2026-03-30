@@ -8,7 +8,7 @@ const API_CONFIG = {
   bookingUrl:   'https://1300852218-g5nf0us9v4.ap-shanghai.tencentscf.com',
   diagnosisUrl: 'https://1300852218-6ugsblbl0w.ap-shanghai.tencentscf.com',
   // 开发模式：设为true时使用模拟响应，不实际调用API
-  devMode: false,
+  devMode: true,
 };
 
 // ========== 诊断流程状态追踪 ==========

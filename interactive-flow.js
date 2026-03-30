@@ -33,8 +33,8 @@ const PAINPOINT_LABEL = {
 
 const RECOMMENDATION_MAP = {
     'direction':      { branch: 'A', version: '1day',    label: '推荐：1天高管工作坊（定方向）', reason: '一天看清方向，找准切入点。' },
-    'implementation': { branch: 'B', version: '2day',    label: '推荐：2天管理者集训（出方案）', reason: '两天打通机制，带走可执行方案。' },
-    'convince':       { branch: 'C', version: '2day',    label: '推荐：2天管理者集训（出方案）', reason: '两天产出经得起追问的汇报材料。' },
+    'implementation': { branch: 'B', version: '2day',    label: '推荐：2天跨部门实战推演', reason: '两天打通机制，带走可执行方案。' },
+    'convince':       { branch: 'C', version: '2day',    label: '推荐：2天跨部门实战推演', reason: '两天产出经得起追问的汇报材料。' },
     'explore':        { branch: 'D', version: 'consult', label: null, reason: null }
 };
 
@@ -82,19 +82,19 @@ const DELIVERABLES = {
     'B': [
         { prefix: '一套可汇报的方案：', content: '完整AI项目画布（含详细ROI测算 + 三种高管叙事）' },
         { prefix: '一张防扯皮的地图：', content: '详细90天路线图 + RACI跨部门责任矩阵 + 第一周清单' },
-        { prefix: '一次抗压测试记录：', content: '经过讲师模拟CEO/CFO/CIO追问验证的风险预演方案' }
+        { prefix: '一次抗压测试记录：', content: '经过高管视角极限模拟、交叉质询后的风险预演方案' }
     ],
     'C': [
         { prefix: '一套可汇报的方案：', content: '完整AI项目画布（含详细ROI测算 + 三种高管叙事）' },
         { prefix: '一张防扯皮的地图：', content: '详细90天路线图 + RACI跨部门责任矩阵 + 第一周清单' },
-        { prefix: '一次抗压测试记录：', content: '经过讲师模拟CEO/CFO/CIO追问验证的风险预演方案' }
+        { prefix: '一次抗压测试记录：', content: '经过高管视角极限模拟、交叉质询后的风险预演方案' }
     ],
     'D': []
 };
 
 const EXPLORE_PROMISE = {
-    badges: ['绝无销售压力', '只提供专业判断', '赠送《AI落地断点自检表》'],
-    note: '如果您暂时不需要培训，我们会直接告诉您。'
+    badges: ['绝无销售压力', '只提供专业判断', '提供《AI落地断点自检表》'],
+    note: '如果您现阶段不需要启动外部工作坊，我们会直接告诉您。'
 };
 
 // ===================================
@@ -709,7 +709,7 @@ function initializeNavigationButtons() {
     });
 
     // Back buttons
-    const backButtons = document.querySelectorAll('.btn-back');
+    const backButtons = document.querySelectorAll('.btn-back, .btn-back-inline');
     backButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             const prevStep = btn.getAttribute('data-prev');
