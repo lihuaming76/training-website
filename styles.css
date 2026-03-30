@@ -4606,6 +4606,7 @@ button {
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.6);
+    font-size: 11px;
 }
 
 /* ===================================
@@ -5438,12 +5439,12 @@ button {
    Founder's Quote Component
    =================================== */
 .founder-quote {
-    max-width: 800px;
-    margin: 1rem auto 1rem;
-    padding: 32px 40px;
+    max-width: 640px;
+    margin: 3rem auto 3rem;
+    padding: 40px 48px 36px;
     position: relative;
-    background-color: #F8F9FA;
-    border-radius: 12px;
+    background: transparent;
+    border-left: none;
 }
 
 /* Scroll Hint */
@@ -5488,12 +5489,12 @@ button {
 
 .quote-icon {
     position: absolute;
-    top: -15px;
-    left: 15px;
-    font-size: 200px;
+    top: -10px;
+    left: -5px;
+    font-size: 140px;
     font-family: Georgia, 'Times New Roman', serif;
     color: #D4AF37;
-    opacity: 0.05;
+    opacity: 0.07;
     line-height: 1;
     z-index: 0;
     pointer-events: none;
@@ -5503,11 +5504,12 @@ button {
     position: relative;
     z-index: 1;
     font-size: 1.125rem;
-    line-height: 1.8;
-    color: #4A4A4A;
-    margin-bottom: 28px;
+    line-height: 1.75;
+    color: #1E293B;
+    margin-bottom: 20px;
     text-align: left;
-    font-weight: 300;
+    font-weight: 400;
+    letter-spacing: 0.01em;
 }
 
 /* Section subtitle no wrap on desktop */
@@ -5520,20 +5522,21 @@ button {
 .quote-signature {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    gap: 12px;
+    align-items: flex-start;
+    gap: 8px;
 }
 
 .signature-line {
-    width: 80px;
+    width: 50px;
     height: 1px;
-    background-color: #CBD5E1;
+    background-color: rgba(212, 175, 55, 0.2);
 }
 
 .signature-name {
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     color: #64748B;
     font-style: normal;
+    font-weight: 400;
 }
 
 .name-highlight {
@@ -5544,17 +5547,19 @@ button {
 
 @media (max-width: 768px) {
     .founder-quote {
-        margin: 32px 20px 40px;
-        padding: 32px 24px;
+        margin: 2rem 20px 2.5rem;
+        padding: 32px 24px 28px;
     }
 
     .quote-icon {
-        font-size: 80px;
-        top: 15px;
-        left: 15px;
+        font-size: 90px;
+        top: -8px;
+        left: -3px;
     }
 
     .quote-text {
         font-size: 1rem;
+        line-height: 1.7;
+        margin-bottom: 16px;
     }
 }

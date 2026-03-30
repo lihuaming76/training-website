@@ -264,4 +264,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         interactiveObserver.observe(interactiveSection);
     }
+
+    // Privacy Policy Modal
+    const privacyLink = document.getElementById('privacyPolicyLink');
+    const privacyModal = document.getElementById('privacyPolicyModal');
+
+    if (privacyLink && privacyModal) {
+        privacyLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            privacyModal.style.display = 'block';
+        });
+
+        // Close modal when clicking outside
+        privacyModal.addEventListener('click', (e) => {
+            if (e.target === privacyModal) {
+                privacyModal.style.display = 'none';
+            }
+        });
+    }
 });

@@ -669,8 +669,27 @@ function initializeNavigationButtons() {
         step1ContinueBtn.addEventListener('click', () => {
             const action = step1ContinueBtn.getAttribute('data-action');
             if (action === 'scroll-to-1b') {
+                // Check if user is already near pain points section
+                const painPointsSection = document.getElementById('pain-points');
+                if (painPointsSection) {
+                    const rect = painPointsSection.getBoundingClientRect();
+                    const isNearPainPoints = rect.top < window.innerHeight && rect.bottom > 0;
+
+                    // If already at pain points section and no selection, show reminder
+                    if (isNearPainPoints && (!flowState.selectedPainPoints || flowState.selectedPainPoints.length === 0)) {
+                        alert('请至少选择一个关键问题');
+                        return;
+                    }
+                }
                 scrollToStep1B();
             } else if (action === 'go-to-step2') {
+                // Validate that at least one pain point is selected
+                if (!flowState.selectedPainPoints || flowState.selectedPainPoints.length === 0) {
+                    alert('请至少选择一个关键问题');
+                    scrollToStep1B();
+                    return;
+                }
+
                 // Update diagnosisState with selected pain points
                 const selectedCards = document.querySelectorAll('#step1 .option-card.selected, #step1 .checkbox-item.selected');
                 if (window.diagnosisState) {
