@@ -252,17 +252,58 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     header.classList.add('nav-minimal');
-                    navCta.textContent = '返回首页';
-                    navCta.setAttribute('href', '#hero');
                 } else {
                     header.classList.remove('nav-minimal');
-                    navCta.textContent = '预约15分钟诊断对话';
+                    navCta.textContent = '预约高管业务诊断';
                     navCta.setAttribute('href', '#interactive');
                 }
             });
         }, { threshold: 0.2 });
 
         interactiveObserver.observe(interactiveSection);
+    }
+
+    // New minimal CTA entry
+    const ctaOptions = document.querySelectorAll('.cta-option');
+    const ctaEntryBtn = document.getElementById('ctaEntryBtn');
+    const ctaEntry = document.getElementById('ctaEntry');
+    const ctaContact = document.getElementById('ctaContact');
+    const ctaCloseBtn = document.getElementById('ctaCloseBtn');
+
+    if (ctaCloseBtn) {
+        ctaCloseBtn.addEventListener('click', () => {
+            document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    ctaOptions.forEach(opt => {
+        opt.addEventListener('click', () => {
+            ctaOptions.forEach(o => o.classList.remove('selected'));
+            opt.classList.add('selected');
+            if (ctaEntryBtn) { ctaEntryBtn.disabled = false; }
+        });
+    });
+
+    if (ctaEntryBtn) {
+        ctaEntryBtn.addEventListener('click', () => {
+            if (ctaEntryBtn.disabled) return;
+            ctaEntry.style.display = 'none';
+            ctaContact.style.display = 'block';
+        });
+    }
+
+    const ctaBackBtn = document.getElementById('ctaBackBtn');
+    if (ctaBackBtn) {
+        ctaBackBtn.addEventListener('click', () => {
+            ctaContact.style.display = 'none';
+            ctaEntry.style.display = 'block';
+        });
+    }
+
+    const bookPhoneBtn2 = document.getElementById('bookPhoneBtn2');
+    const phoneBookingModal = document.getElementById('phoneBookingModal');
+    if (bookPhoneBtn2 && phoneBookingModal) {
+        bookPhoneBtn2.addEventListener('click', () => { phoneBookingModal.style.display = 'flex'; });
     }
 
     // Privacy Policy Modal
@@ -282,4 +323,88 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+// ===================================
+// Intelligence Core Visual (Service 3)
+// ===================================
+const canvas = document.getElementById('intelligenceCore');
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+
+    function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        canvas.style.width = rect.width + 'px';
+        canvas.style.height = rect.height + 'px';
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Network nodes with business terms
+    const nodes = [
+        { x: 0.2, y: 0.3, label: '库存熔断预警', phase: 0 },
+        { x: 0.35, y: 0.2, label: '渠道ROI对标', phase: 0.3 },
+        { x: 0.5, y: 0.15, label: '下发动作指令', phase: 0.6 },
+        { x: 0.65, y: 0.25, label: '门店异常归因', phase: 0.9 },
+        { x: 0.8, y: 0.35, label: '价格策略修正', phase: 1.2 },
+        { x: 0.25, y: 0.55, label: '调拨建议验证', phase: 1.5 },
+        { x: 0.45, y: 0.5, label: '毛利波动解释', phase: 1.8 },
+        { x: 0.55, y: 0.6, label: '促销效果回收', phase: 2.1 },
+        { x: 0.7, y: 0.55, label: '最佳实践固化', phase: 2.4 },
+        { x: 0.4, y: 0.75, label: '角色任务分发', phase: 2.7 }
+    ];
+
+    const connections = [
+        [0,1], [1,2], [2,3], [3,4], [0,5], [1,6], [2,6], [3,8], [5,6], [6,7], [7,8], [6,9]
+    ];
+
+    let time = 0;
+
+    function draw() {
+        const w = canvas.width / dpr;
+        const h = canvas.height / dpr;
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Draw connections
+        ctx.strokeStyle = 'rgba(0, 166, 212, 0.15)';
+        ctx.lineWidth = 1;
+        connections.forEach(([i, j]) => {
+            const n1 = nodes[i];
+            const n2 = nodes[j];
+            ctx.beginPath();
+            ctx.moveTo(n1.x * w, n1.y * h);
+            ctx.lineTo(n2.x * w, n2.y * h);
+            ctx.stroke();
+        });
+
+        // Draw nodes
+        nodes.forEach((node, i) => {
+            const pulse = Math.sin(time * 0.5 + node.phase) * 0.3 + 0.7;
+            const x = node.x * w;
+            const y = node.y * h;
+
+            // Node circle
+            ctx.beginPath();
+            ctx.arc(x, y, 3, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0, 166, 212, ${pulse * 0.6})`;
+            ctx.fill();
+
+            // Label
+            ctx.font = '9px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+            ctx.fillStyle = `rgba(255, 255, 255, ${pulse * 0.5})`;
+            ctx.textAlign = 'center';
+            ctx.fillText(node.label, x, y - 8);
+        });
+
+        time += 0.02;
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+}
 });
