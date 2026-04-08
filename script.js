@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     header.classList.add('nav-minimal');
                 } else {
                     header.classList.remove('nav-minimal');
-                    navCta.textContent = '预约高管业务诊断';
+                    navCta.textContent = '预约15分钟诊断对话';
                     navCta.setAttribute('href', '#interactive');
                 }
             });
