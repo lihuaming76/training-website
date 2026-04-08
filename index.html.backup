@@ -3390,44 +3390,200 @@
         </div>
     </section>
 
-    <section class="trust-section section" id="trust">
+    <!-- AI 决策智能体建设 Service Detail -->
+    <section class="svc3 section" id="svc3">
         <div class="container">
 
-            <!-- A. Eyebrow -->
-            <p class="trust-eyebrow reveal">这些方法，不是从 PPT 里推演出来的——它们来自真实转型项目的成败复盘</p>
-
-            <!-- B. 主洞察 -->
-            <h2 class="trust-headline reveal">多数转型的失败，不是死于技术，<br>而是死于高层认知的断裂与推进机制的缺失。</h2>
-
-            <!-- C. 支撑说明 -->
-            <p class="trust-body reveal">在埃森哲、德勤与 IBM 的 23 年里，我参与并主导过数十个企业转型项目。最终确认：不能变成业务动作的 AI，都是成本。Pallas Studio 的每一条闭环路径，都建立在真实成败的复盘之上，而不是纸面推演。</p>
-
-            <!-- D. 落款 -->
-            <p class="trust-signature reveal">李华明 Huaming Li &nbsp;·&nbsp; Pallas Studio 创始人</p>
-
-            <!-- E. 分割线 -->
-            <div class="trust-divider"></div>
-
-            <!-- F. Credential ribbon + Logo -->
-            <div class="trust-credentials reveal">
-                <span>23年转型实战</span>
-                <span class="trust-dot">·</span>
-                <span>26个标杆项目</span>
-                <span class="trust-dot">·</span>
-                <span>埃森哲 / 德勤 / IBM</span>
-                <span class="trust-dot">·</span>
-                <span>消费品、零售、制造、物流、金融行业头部企业</span>
+            <!-- 1. Hero -->
+            <div class="svc3-hero reveal">
+                <div class="svc3-visual-anchor">
+                    <canvas id="intelligenceCore" class="intelligence-canvas"></canvas>
+                </div>
+                <div class="svc3-hero-content">
+                    <p class="svc-eyebrow">第三层服务</p>
+                    <h2 class="svc3-title">把跑通的胜率，固化为企业专属的 AI 智能体。</h2>
+                    <p class="svc3-subtitle">不是再建一个系统。而是把已经验证有效的"数据—判断—动作"闭环，写进企业自己的经营引擎。</p>
+                    <p class="svc3-tagline">让最能打的判断，不再跟着人走。</p>
+                    <a href="#interactive" class="btn btn-primary" data-entry-source="AI智能体Hero">预约15分钟诊断对话</a>
+                </div>
             </div>
 
-            <div class="trust-logos reveal">
-                <img src="images/customer-logos/Selected/Deppon.png" alt="Deppon">
-                <img src="images/customer-logos/Selected/Anta_logo.svg" alt="Anta">
-                <img src="images/customer-logos/Selected/Huawei_Standard_logo.svg" alt="Huawei">
-                <img src="images/customer-logos/Selected/Coca-Cola_logo.svg" alt="Coca-Cola">
-                <img src="images/customer-logos/Selected/Unilever.svg" alt="Unilever">
-                <img src="images/customer-logos/Selected/Ford_logo_flat.svg" alt="Ford">
-                <img src="images/customer-logos/Selected/Amer_Sports.svg" alt="Amer Sports">
-                <img src="images/customer-logos/Selected/Bosideng.png" alt="Bosideng">
+            <!-- 2. 核心痛点 -->
+            <div class="svc3-pain reveal">
+                <h3 class="svc3-pain-title">企业真正贵的，不是看不见数据。是判断留不下来。</h3>
+                <div class="svc3-pain-grid">
+                    <div class="svc3-pain-item">
+                        <p class="pain-statement">优秀的人一走，经验就带走了</p>
+                    </div>
+                    <div class="svc3-pain-item">
+                        <p class="pain-statement">一次仗打赢了，下次不一定还会赢</p>
+                    </div>
+                    <div class="svc3-pain-item">
+                        <p class="pain-statement">系统记住了数字，却没记住决策</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 产品定义 -->
+            <div class="svc3-definition reveal">
+                <p class="svc-section-label">产品定义</p>
+                <h3 class="svc3-def-title">我们不是在建一个大平台，我们在建一个会工作的经营智能体。</h3>
+                <div class="svc3-def-grid">
+                    <div class="svc3-def-not">
+                        <p class="def-label">不是</p>
+                        <ul>
+                            <li>报表升级</li>
+                            <li>平台堆砌</li>
+                            <li>PPT 蓝图</li>
+                        </ul>
+                    </div>
+                    <div class="svc3-def-is">
+                        <p class="def-label">而是</p>
+                        <p class="def-statement">企业级 AI 决策资产</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 智能体架构 -->
+            <div class="svc3-architecture reveal">
+                <p class="svc-section-label">智能体架构</p>
+                <div class="svc3-arch-layers">
+                    <div class="arch-layer">
+                        <span class="layer-num">01</span>
+                        <h5>神经末梢层</h5>
+                        <p>从业务系统、人工录入、外部接口持续吸收数据，形成实时感知。</p>
+                    </div>
+                    <div class="arch-layer">
+                        <span class="layer-num">02</span>
+                        <h5>中枢思考层</h5>
+                        <p>用已验证的判断规则、归因模型、标杆对比逻辑，自动完成异常识别与原因推断。</p>
+                    </div>
+                    <div class="arch-layer">
+                        <span class="layer-num">03</span>
+                        <h5>动作下发层</h5>
+                        <p>根据角色权限与业务场景，定向推送建议、生成任务、触发预警。</p>
+                    </div>
+                    <div class="arch-layer">
+                        <span class="layer-num">04</span>
+                        <h5>记忆进化层</h5>
+                        <p>回收执行结果，持续校准判断模型，让智能体越用越准。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. 工作机制 -->
+            <div class="svc3-mechanism reveal">
+                <p class="svc-section-label">工作机制</p>
+                <h3 class="svc3-mech-title">它最大的价值不是告诉你"昨天发生了什么"，而是告诉你：为了明天的利润，现在该让谁去做什么。</h3>
+                <div class="svc3-mech-flow">
+                    <div class="mech-step">主动盯盘</div>
+                    <div class="mech-arrow">→</div>
+                    <div class="mech-step">异常归因</div>
+                    <div class="mech-arrow">→</div>
+                    <div class="mech-step">标杆比较</div>
+                    <div class="mech-arrow">→</div>
+                    <div class="mech-step">生成建议</div>
+                    <div class="mech-arrow">→</div>
+                    <div class="mech-step">定向下发</div>
+                    <div class="mech-arrow">→</div>
+                    <div class="mech-step">回收结果</div>
+                </div>
+            </div>
+
+            <!-- 6. 落地方式 -->
+            <div class="svc3-landing reveal">
+                <p class="svc-section-label">落地方式</p>
+                <h3 class="svc3-land-title">这不是悬在空中的 AI 概念，它最终会被写进企业自己的平台和系统。</h3>
+                <div class="svc3-land-layers">
+                    <div class="land-layer">
+                        <span class="land-icon">🧠</span>
+                        <h5>AI 智能体</h5>
+                        <p>主角</p>
+                    </div>
+                    <div class="land-layer">
+                        <span class="land-icon">⚙️</span>
+                        <h5>平台 / 系统</h5>
+                        <p>承载</p>
+                    </div>
+                    <div class="land-layer">
+                        <span class="land-icon">📊</span>
+                        <h5>企业经营闭环</h5>
+                        <p>业务价值</p>
+                    </div>
+                    <div class="land-layer">
+                        <span class="land-icon">💾</span>
+                        <h5>组织记忆</h5>
+                        <p>长期资产</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. 交付结果 -->
+            <div class="svc3-deliverables reveal">
+                <p class="svc-section-label">交付结果</p>
+                <p class="svc3-deliverables-tier">核心资产</p>
+                <div class="svc3-core-assets">
+                    <div class="svc-asset-item svc-asset-core"><span class="svc-asset-icon">01</span><h5>企业级 AI 决策大脑蓝图</h5><p>明确智能体能力边界、数据依赖与系统架构。</p></div>
+                    <div class="svc-asset-item svc-asset-core"><span class="svc-asset-icon">02</span><h5>核心智能体可运行程序</h5><p>不是文档，而是能真正工作的代码与模型。</p></div>
+                </div>
+                <p class="svc3-deliverables-tier">支撑资产</p>
+                <div class="svc-assets-grid">
+                    <div class="svc-asset-item"><span class="svc-asset-icon">03</span><h5>异常归因与行动推荐模型</h5><p>把最能打的判断逻辑固化为可重复执行的算法。</p></div>
+                    <div class="svc-asset-item"><span class="svc-asset-icon">04</span><h5>基于角色的自动任务分发机制</h5><p>让智能体知道该把什么建议推给谁。</p></div>
+                    <div class="svc-asset-item"><span class="svc-asset-icon">05</span><h5>企业经营记忆固化资产</h5><p>最佳实践、失败教训、关键阈值，全部代码化。</p></div>
+                    <div class="svc-asset-item"><span class="svc-asset-icon">06</span><h5>智能体分阶段固化计划</h5><p>从第一个场景到多场景复制的清晰路径。</p></div>
+                </div>
+            </div>
+
+            <!-- 8. 反向筛选 -->
+            <div class="svc3-filter reveal">
+                <p class="svc-section-label">反向筛选</p>
+                <h3 class="svc3-filter-title">不是所有企业，都适合一上来就做智能体。</h3>
+                <div class="svc3-filter-content">
+                    <p class="filter-statement">连第一条闭环都没跑通的企业，不适合直接做服务三。</p>
+                    <div class="filter-logic">
+                        <div class="filter-step">
+                            <span class="filter-num">先</span>
+                            <p>做服务二，用90天跑通第一条闭环</p>
+                        </div>
+                        <div class="filter-arrow">→</div>
+                        <div class="filter-step">
+                            <span class="filter-num">再</span>
+                            <p>进入服务三，把已经验证有效的机制推进到代码固化阶段</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. 三层体系位置 -->
+            <div class="svc3-position reveal">
+                <p class="svc-section-label">这项服务在三层体系中的位置</p>
+                <div class="svc-position-steps">
+                    <div class="svc-position-step">
+                        <span class="svc-pos-num">第一层</span>
+                        <h5>经营共创工作坊</h5>
+                        <p>拉齐共识，锁定首战场景。</p>
+                    </div>
+                    <div class="svc-position-arrow">→</div>
+                    <div class="svc-position-step">
+                        <span class="svc-pos-num">第二层</span>
+                        <h5>第一闭环落地（90天）</h5>
+                        <p>把第一条链真正跑通，验证推进机制。</p>
+                    </div>
+                    <div class="svc-position-arrow">→</div>
+                    <div class="svc-position-step svc-position-step--active">
+                        <span class="svc-pos-num">第三层</span>
+                        <h5>AI 决策智能体建设</h5>
+                        <p>把验证成功的机制固化为企业专属 AI 资产，在更多场景中放大复制。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. CTA -->
+            <div class="svc-cta-block reveal">
+                <p class="svc-cta-lead">先判断你们该不该做 AI 智能体固化，再决定下一步。</p>
+                <a href="#interactive" class="btn btn-primary" data-entry-source="AI智能体底部CTA">预约15分钟诊断对话</a>
+                <p class="svc-cta-sub">不急着立项，先把问题拆对。</p>
             </div>
 
         </div>
@@ -3603,7 +3759,6 @@
         </div>
     </div>
 
-
     <!-- Cases Section -->
     <section class="cases section" id="cases">
         <div class="container">
@@ -3719,7 +3874,6 @@
 
         </div>
     </section>
-
 
     <!-- Courses Section - Premium Consulting Landing Page -->
     <section class="courses section" id="courses">
@@ -4349,206 +4503,6 @@
         </div>
     </section>
 
-
-    <!-- AI 决策智能体建设 Service Detail -->
-    <section class="svc3 section" id="svc3">
-        <div class="container">
-
-            <!-- 1. Hero -->
-            <div class="svc3-hero reveal">
-                <div class="svc3-visual-anchor">
-                    <canvas id="intelligenceCore" class="intelligence-canvas"></canvas>
-                </div>
-                <div class="svc3-hero-content">
-                    <p class="svc-eyebrow">第三层服务</p>
-                    <h2 class="svc3-title">把跑通的胜率，固化为企业专属的 AI 智能体。</h2>
-                    <p class="svc3-subtitle">不是再建一个系统。而是把已经验证有效的"数据—判断—动作"闭环，写进企业自己的经营引擎。</p>
-                    <p class="svc3-tagline">让最能打的判断，不再跟着人走。</p>
-                    <a href="#interactive" class="btn btn-primary" data-entry-source="AI智能体Hero">预约15分钟诊断对话</a>
-                </div>
-            </div>
-
-            <!-- 2. 核心痛点 -->
-            <div class="svc3-pain reveal">
-                <h3 class="svc3-pain-title">企业真正贵的，不是看不见数据。是判断留不下来。</h3>
-                <div class="svc3-pain-grid">
-                    <div class="svc3-pain-item">
-                        <p class="pain-statement">优秀的人一走，经验就带走了</p>
-                    </div>
-                    <div class="svc3-pain-item">
-                        <p class="pain-statement">一次仗打赢了，下次不一定还会赢</p>
-                    </div>
-                    <div class="svc3-pain-item">
-                        <p class="pain-statement">系统记住了数字，却没记住决策</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. 产品定义 -->
-            <div class="svc3-definition reveal">
-                <p class="svc-section-label">产品定义</p>
-                <h3 class="svc3-def-title">我们不是在建一个大平台，我们在建一个会工作的经营智能体。</h3>
-                <div class="svc3-def-grid">
-                    <div class="svc3-def-not">
-                        <p class="def-label">不是</p>
-                        <ul>
-                            <li>报表升级</li>
-                            <li>平台堆砌</li>
-                            <li>PPT 蓝图</li>
-                        </ul>
-                    </div>
-                    <div class="svc3-def-is">
-                        <p class="def-label">而是</p>
-                        <p class="def-statement">企业级 AI 决策资产</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. 智能体架构 -->
-            <div class="svc3-architecture reveal">
-                <p class="svc-section-label">智能体架构</p>
-                <div class="svc3-arch-layers">
-                    <div class="arch-layer">
-                        <span class="layer-num">01</span>
-                        <h5>神经末梢层</h5>
-                        <p>从业务系统、人工录入、外部接口持续吸收数据，形成实时感知。</p>
-                    </div>
-                    <div class="arch-layer">
-                        <span class="layer-num">02</span>
-                        <h5>中枢思考层</h5>
-                        <p>用已验证的判断规则、归因模型、标杆对比逻辑，自动完成异常识别与原因推断。</p>
-                    </div>
-                    <div class="arch-layer">
-                        <span class="layer-num">03</span>
-                        <h5>动作下发层</h5>
-                        <p>根据角色权限与业务场景，定向推送建议、生成任务、触发预警。</p>
-                    </div>
-                    <div class="arch-layer">
-                        <span class="layer-num">04</span>
-                        <h5>记忆进化层</h5>
-                        <p>回收执行结果，持续校准判断模型，让智能体越用越准。</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5. 工作机制 -->
-            <div class="svc3-mechanism reveal">
-                <p class="svc-section-label">工作机制</p>
-                <h3 class="svc3-mech-title">它最大的价值不是告诉你"昨天发生了什么"，而是告诉你：为了明天的利润，现在该让谁去做什么。</h3>
-                <div class="svc3-mech-flow">
-                    <div class="mech-step">主动盯盘</div>
-                    <div class="mech-arrow">→</div>
-                    <div class="mech-step">异常归因</div>
-                    <div class="mech-arrow">→</div>
-                    <div class="mech-step">标杆比较</div>
-                    <div class="mech-arrow">→</div>
-                    <div class="mech-step">生成建议</div>
-                    <div class="mech-arrow">→</div>
-                    <div class="mech-step">定向下发</div>
-                    <div class="mech-arrow">→</div>
-                    <div class="mech-step">回收结果</div>
-                </div>
-            </div>
-
-            <!-- 6. 落地方式 -->
-            <div class="svc3-landing reveal">
-                <p class="svc-section-label">落地方式</p>
-                <h3 class="svc3-land-title">这不是悬在空中的 AI 概念，它最终会被写进企业自己的平台和系统。</h3>
-                <div class="svc3-land-layers">
-                    <div class="land-layer">
-                        <span class="land-icon">🧠</span>
-                        <h5>AI 智能体</h5>
-                        <p>主角</p>
-                    </div>
-                    <div class="land-layer">
-                        <span class="land-icon">⚙️</span>
-                        <h5>平台 / 系统</h5>
-                        <p>承载</p>
-                    </div>
-                    <div class="land-layer">
-                        <span class="land-icon">📊</span>
-                        <h5>企业经营闭环</h5>
-                        <p>业务价值</p>
-                    </div>
-                    <div class="land-layer">
-                        <span class="land-icon">💾</span>
-                        <h5>组织记忆</h5>
-                        <p>长期资产</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 7. 交付结果 -->
-            <div class="svc3-deliverables reveal">
-                <p class="svc-section-label">交付结果</p>
-                <p class="svc3-deliverables-tier">核心资产</p>
-                <div class="svc3-core-assets">
-                    <div class="svc-asset-item svc-asset-core"><span class="svc-asset-icon">01</span><h5>企业级 AI 决策大脑蓝图</h5><p>明确智能体能力边界、数据依赖与系统架构。</p></div>
-                    <div class="svc-asset-item svc-asset-core"><span class="svc-asset-icon">02</span><h5>核心智能体可运行程序</h5><p>不是文档，而是能真正工作的代码与模型。</p></div>
-                </div>
-                <p class="svc3-deliverables-tier">支撑资产</p>
-                <div class="svc-assets-grid">
-                    <div class="svc-asset-item"><span class="svc-asset-icon">03</span><h5>异常归因与行动推荐模型</h5><p>把最能打的判断逻辑固化为可重复执行的算法。</p></div>
-                    <div class="svc-asset-item"><span class="svc-asset-icon">04</span><h5>基于角色的自动任务分发机制</h5><p>让智能体知道该把什么建议推给谁。</p></div>
-                    <div class="svc-asset-item"><span class="svc-asset-icon">05</span><h5>企业经营记忆固化资产</h5><p>最佳实践、失败教训、关键阈值，全部代码化。</p></div>
-                    <div class="svc-asset-item"><span class="svc-asset-icon">06</span><h5>智能体分阶段固化计划</h5><p>从第一个场景到多场景复制的清晰路径。</p></div>
-                </div>
-            </div>
-
-            <!-- 8. 反向筛选 -->
-            <div class="svc3-filter reveal">
-                <p class="svc-section-label">反向筛选</p>
-                <h3 class="svc3-filter-title">不是所有企业，都适合一上来就做智能体。</h3>
-                <div class="svc3-filter-content">
-                    <p class="filter-statement">连第一条闭环都没跑通的企业，不适合直接做服务三。</p>
-                    <div class="filter-logic">
-                        <div class="filter-step">
-                            <span class="filter-num">先</span>
-                            <p>做服务二，用90天跑通第一条闭环</p>
-                        </div>
-                        <div class="filter-arrow">→</div>
-                        <div class="filter-step">
-                            <span class="filter-num">再</span>
-                            <p>进入服务三，把已经验证有效的机制推进到代码固化阶段</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 9. 三层体系位置 -->
-            <div class="svc3-position reveal">
-                <p class="svc-section-label">这项服务在三层体系中的位置</p>
-                <div class="svc-position-steps">
-                    <div class="svc-position-step">
-                        <span class="svc-pos-num">第一层</span>
-                        <h5>经营共创工作坊</h5>
-                        <p>拉齐共识，锁定首战场景。</p>
-                    </div>
-                    <div class="svc-position-arrow">→</div>
-                    <div class="svc-position-step">
-                        <span class="svc-pos-num">第二层</span>
-                        <h5>第一闭环落地（90天）</h5>
-                        <p>把第一条链真正跑通，验证推进机制。</p>
-                    </div>
-                    <div class="svc-position-arrow">→</div>
-                    <div class="svc-position-step svc-position-step--active">
-                        <span class="svc-pos-num">第三层</span>
-                        <h5>AI 决策智能体建设</h5>
-                        <p>把验证成功的机制固化为企业专属 AI 资产，在更多场景中放大复制。</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 10. CTA -->
-            <div class="svc-cta-block reveal">
-                <p class="svc-cta-lead">先判断你们该不该做 AI 智能体固化，再决定下一步。</p>
-                <a href="#interactive" class="btn btn-primary" data-entry-source="AI智能体底部CTA">预约15分钟诊断对话</a>
-                <p class="svc-cta-sub">不急着立项，先把问题拆对。</p>
-            </div>
-
-        </div>
-    </section>
-
     <!-- About Section -->
     <section class="about section" id="about">
         <div class="container">
@@ -4678,7 +4632,49 @@
         </div>
     </section>
 
+    <!-- Trust Section — 信任压缩区 -->
+    <section class="trust-section section" id="trust">
+        <div class="container">
 
+            <!-- A. Eyebrow -->
+            <p class="trust-eyebrow reveal">这些方法，不是从 PPT 里推演出来的——它们来自真实转型项目的成败复盘</p>
+
+            <!-- B. 主洞察 -->
+            <h2 class="trust-headline reveal">多数转型的失败，不是死于技术，<br>而是死于高层认知的断裂与推进机制的缺失。</h2>
+
+            <!-- C. 支撑说明 -->
+            <p class="trust-body reveal">在埃森哲、德勤与 IBM 的 23 年里，我参与并主导过数十个企业转型项目。最终确认：不能变成业务动作的 AI，都是成本。Pallas Studio 的每一条闭环路径，都建立在真实成败的复盘之上，而不是纸面推演。</p>
+
+            <!-- D. 落款 -->
+            <p class="trust-signature reveal">李华明 Huaming Li &nbsp;·&nbsp; Pallas Studio 创始人</p>
+
+            <!-- E. 分割线 -->
+            <div class="trust-divider"></div>
+
+            <!-- F. Credential ribbon + Logo -->
+            <div class="trust-credentials reveal">
+                <span>23年转型实战</span>
+                <span class="trust-dot">·</span>
+                <span>26个标杆项目</span>
+                <span class="trust-dot">·</span>
+                <span>埃森哲 / 德勤 / IBM</span>
+                <span class="trust-dot">·</span>
+                <span>消费品、零售、制造、物流、金融行业头部企业</span>
+            </div>
+
+            <div class="trust-logos reveal">
+                <img src="images/customer-logos/Selected/Deppon.png" alt="Deppon">
+                <img src="images/customer-logos/Selected/Anta_logo.svg" alt="Anta">
+                <img src="images/customer-logos/Selected/Huawei_Standard_logo.svg" alt="Huawei">
+                <img src="images/customer-logos/Selected/Coca-Cola_logo.svg" alt="Coca-Cola">
+                <img src="images/customer-logos/Selected/Unilever.svg" alt="Unilever">
+                <img src="images/customer-logos/Selected/Ford_logo_flat.svg" alt="Ford">
+                <img src="images/customer-logos/Selected/Amer_Sports.svg" alt="Amer Sports">
+                <img src="images/customer-logos/Selected/Bosideng.png" alt="Bosideng">
+            </div>
+
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
