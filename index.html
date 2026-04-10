@@ -37,10 +37,15 @@
     <link rel="alternate" hreflang="zh-CN" href="https://www.pallas-studio.com/">
     <link rel="alternate" hreflang="x-default" href="https://www.pallas-studio.com/">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+
+    <!-- 字体：使用国内镜像（fonts.loli.net），接口与 Google Fonts 完全兼容，解决 GFW 封锁问题 -->
+    <link rel="preconnect" href="https://fonts.loli.net">
+    <link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
+    <link href="https://fonts.loli.net/css2?family=Playfair+Display:wght@600;700;800&family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
 
@@ -3234,34 +3239,110 @@
                     </div>
                 </div>
 
-                <!-- Right: Evolution Graphic -->
+                <!-- Right: 三层路径主视觉（Hero 内只保留路径图，母锚图已移至服务模块上方） -->
                 <div class="hero-v2-right" aria-hidden="true">
-                    <svg class="hero-v2-graphic" viewBox="0 0 320 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Vertical spine line - stronger -->
-                        <line x1="80" y1="60" x2="80" y2="370" stroke="#014B94" stroke-width="2" opacity="0.8"/>
 
-                        <!-- Node 01 -->
-                        <circle cx="80" cy="100" r="20" stroke="#014B94" stroke-width="1.5" fill="rgba(1,75,148,0.1)"/>
-                        <text x="80" y="105" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-size="12" font-family="'DM Sans',sans-serif" font-weight="500">01</text>
-                        <line x1="106" y1="100" x2="198" y2="100" stroke="#014B94" stroke-width="1" opacity="0.5" stroke-dasharray="4 3"/>
-                        <text x="208" y="96" fill="rgba(255,255,255,0.72)" font-size="13" font-family="'Noto Sans SC',sans-serif" font-weight="500">经营共创</text>
-                        <text x="208" y="113" fill="rgba(255,255,255,0.42)" font-size="11" font-family="'Noto Sans SC',sans-serif">锁定首战场景</text>
+                    <!--
+                        HeroPathDiagram v2.0
+                        Hero 内仅保留三层路径图，无任何母锚图残留
+                        01经营共创 / 02场景跑通 / 03能力固化
+                    -->
+                    <div class="hero-path-wrap">
 
-                        <!-- Node 02 - focal point -->
-                        <circle cx="80" cy="225" r="26" stroke="#014B94" stroke-width="2" fill="rgba(1,75,148,0.18)"/>
-                        <circle cx="80" cy="225" r="34" stroke="#014B94" stroke-width="0.5" fill="none" opacity="0.2" class="hero-node-02-halo"/>
-                        <text x="80" y="231" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="13" font-family="'DM Sans',sans-serif" font-weight="700">02</text>
-                        <line x1="108" y1="225" x2="198" y2="225" stroke="#014B94" stroke-width="1.5" opacity="0.6" stroke-dasharray="4 3"/>
-                        <text x="208" y="220" fill="rgba(255,255,255,0.88)" font-size="14" font-family="'Noto Sans SC',sans-serif" font-weight="600">场景跑通</text>
-                        <text x="208" y="238" fill="rgba(255,255,255,0.5)" font-size="11" font-family="'Noto Sans SC',sans-serif">跑通第一条闭环</text>
+                        <!-- 主视觉层：01/02/03 三层路径图 v3.0（轻模块化升级） -->
+                        <svg class="hero-path-diagram" viewBox="0 0 340 440" fill="none"
+                             xmlns="http://www.w3.org/2000/svg"
+                             role="img" aria-label="三层合作路径：经营共创、场景跑通、能力固化">
 
-                        <!-- Node 03 - cyan accent -->
-                        <circle cx="80" cy="345" r="20" stroke="#00A6D4" stroke-width="1.5" fill="rgba(0,166,212,0.08)" class="hero-node-accent"/>
-                        <text x="80" y="350" text-anchor="middle" fill="#00A6D4" font-size="12" font-family="'DM Sans',sans-serif" font-weight="600">03</text>
-                        <line x1="106" y1="345" x2="198" y2="345" stroke="#00A6D4" stroke-width="1" opacity="0.45" stroke-dasharray="4 3"/>
-                        <text x="208" y="341" fill="rgba(255,255,255,0.72)" font-size="13" font-family="'Noto Sans SC',sans-serif" font-weight="500">能力固化</text>
-                        <text x="208" y="358" fill="rgba(255,255,255,0.42)" font-size="11" font-family="'Noto Sans SC',sans-serif">沉淀AI决策资产</text>
-                    </svg>
+                            <!-- 纵向主轴线：略加强 -->
+                            <line x1="52" y1="68" x2="52" y2="382"
+                                stroke="#014B94" stroke-width="2" opacity="0.75"/>
+
+                            <!-- ══ 步骤 01：经营共创 ══ -->
+                            <!-- 轻模块底板 -->
+                            <rect x="84" y="72" width="244" height="64" rx="4"
+                                fill="rgba(1,75,148,0.07)"
+                                stroke="rgba(1,75,148,0.18)" stroke-width="0.8"/>
+                            <!-- 节点圆：加大、加重 -->
+                            <circle cx="52" cy="104" r="26"
+                                stroke="#014B94" stroke-width="1.8"
+                                fill="rgba(1,75,148,0.14)"/>
+                            <!-- 连接横线 -->
+                            <line x1="78" y1="104" x2="90" y2="104"
+                                stroke="#014B94" stroke-width="1" opacity="0.45"/>
+                            <!-- 数字：字号升级、字重加强 -->
+                            <text x="52" y="110" text-anchor="middle"
+                                fill="rgba(255,255,255,0.72)"
+                                font-size="15" font-family="'DM Sans',sans-serif"
+                                font-weight="700">01</text>
+                            <!-- 步骤标题 -->
+                            <text x="104" y="98" fill="rgba(255,255,255,0.85)"
+                                font-size="14" font-family="'Noto Sans SC',sans-serif"
+                                font-weight="700">经营共创</text>
+                            <!-- 副句 -->
+                            <text x="104" y="118" fill="rgba(255,255,255,0.45)"
+                                font-size="11" font-family="'Noto Sans SC',sans-serif">锁定首战场景</text>
+
+                            <!-- ══ 步骤 02：场景跑通（核心层，最强视觉） ══ -->
+                            <!-- 轻模块底板：略亮 -->
+                            <rect x="84" y="188" width="244" height="72" rx="4"
+                                fill="rgba(1,75,148,0.13)"
+                                stroke="rgba(1,75,148,0.32)" stroke-width="1"/>
+                            <!-- 左侧强调竖条 -->
+                            <rect x="84" y="188" width="2.5" height="72" rx="1"
+                                fill="rgba(1,75,148,0.55)"/>
+                            <!-- 节点圆：最大 -->
+                            <circle cx="52" cy="224" r="32"
+                                stroke="#014B94" stroke-width="2.2"
+                                fill="rgba(1,75,148,0.22)"/>
+                            <!-- 外晕圈 -->
+                            <circle cx="52" cy="224" r="40"
+                                stroke="#014B94" stroke-width="0.6"
+                                fill="none" opacity="0.20"/>
+                            <!-- 连接横线：略粗 -->
+                            <line x1="84" y1="224" x2="90" y2="224"
+                                stroke="#014B94" stroke-width="1.5" opacity="0.55"/>
+                            <!-- 数字：最大最重 -->
+                            <text x="52" y="231" text-anchor="middle"
+                                fill="rgba(255,255,255,0.95)"
+                                font-size="17" font-family="'DM Sans',sans-serif"
+                                font-weight="800">02</text>
+                            <!-- 步骤标题：最亮 -->
+                            <text x="104" y="215" fill="#ffffff"
+                                font-size="15" font-family="'Noto Sans SC',sans-serif"
+                                font-weight="800">场景跑通</text>
+                            <!-- 副句 -->
+                            <text x="104" y="237" fill="rgba(255,255,255,0.55)"
+                                font-size="11" font-family="'Noto Sans SC',sans-serif">跑通第一条闭环</text>
+
+                            <!-- ══ 步骤 03：能力固化（青色终点） ══ -->
+                            <!-- 轻模块底板 -->
+                            <rect x="84" y="348" width="244" height="64" rx="4"
+                                fill="rgba(0,166,212,0.05)"
+                                stroke="rgba(0,166,212,0.20)" stroke-width="0.8"/>
+                            <!-- 节点圆：青色 -->
+                            <circle cx="52" cy="380" r="26"
+                                stroke="#00A6D4" stroke-width="1.8"
+                                fill="rgba(0,166,212,0.10)"/>
+                            <!-- 连接横线 -->
+                            <line x1="78" y1="380" x2="90" y2="380"
+                                stroke="#00A6D4" stroke-width="1" opacity="0.45"/>
+                            <!-- 数字：青色 -->
+                            <text x="52" y="386" text-anchor="middle"
+                                fill="#00A6D4"
+                                font-size="15" font-family="'DM Sans',sans-serif"
+                                font-weight="700">03</text>
+                            <!-- 步骤标题 -->
+                            <text x="104" y="374" fill="rgba(255,255,255,0.85)"
+                                font-size="14" font-family="'Noto Sans SC',sans-serif"
+                                font-weight="700">能力固化</text>
+                            <!-- 副句 -->
+                            <text x="104" y="394" fill="rgba(255,255,255,0.45)"
+                                font-size="11" font-family="'Noto Sans SC',sans-serif">沉淀AI决策资产</text>
+
+                        </svg>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -3353,43 +3434,6 @@
         </div>
     </section>
 
-    <!-- Diagnosis Section -->
-    <section class="diagnosis section" id="diagnosis">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title reveal">企业做数据和AI，真正卡住的不是技术，是这三关</h2>
-                <p class="section-subtitle reveal">只有跨越共识、路径与组织承接这三道管理壁垒，数据与AI才能真正从技术投入转化为经营产出</p>
-            </div>
-
-            <div class="diagnosis-grid">
-                <div class="diagnosis-card reveal stagger-1">
-                    <div class="diagnosis-number">01</div>
-                    <h3 class="diagnosis-title">第一关：对不齐</h3>
-                    <h4 class="diagnosis-subtitle">战略共识不清</h4>
-                    <p class="diagnosis-problem">管理层、业务、IT、数据对"AI先解决什么问题"理解并不一致。</p>
-                    <p class="diagnosis-help">我帮助团队在2天内对齐目标、场景与决策原则。</p>
-                </div>
-                <div class="diagnosis-card reveal stagger-2">
-                    <div class="diagnosis-number">02</div>
-                    <h3 class="diagnosis-title">第二关：走不动</h3>
-                    <h4 class="diagnosis-subtitle">缺少优先级与路径</h4>
-                    <p class="diagnosis-problem">方向看似明确，但第一步做什么、谁来做、做到什么标准并不清楚。</p>
-                    <p class="diagnosis-help">我帮助团队收敛优先机会，形成项目画布与90天路线图。</p>
-                </div>
-                <div class="diagnosis-card reveal stagger-3">
-                    <div class="diagnosis-number">03</div>
-                    <h3 class="diagnosis-title">第三关：接不住</h3>
-                    <h4 class="diagnosis-subtitle">组织与治理能力脱节</h4>
-                    <p class="diagnosis-problem">试点能做起来，但难沉淀、难复制，项目仍然依赖少数人硬推。</p>
-                    <p class="diagnosis-help">我帮助团队明确协作机制、数据口径与验收方式，让试点变成组织能力。</p>
-                </div>
-            </div>
-            <div class="diagnosis-link">
-                <a href="#solution-process">查看标准化破局路径 →</a>
-            </div>
-        </div>
-    </section>
-
     <section class="trust-section section" id="trust">
         <div class="container">
 
@@ -3430,87 +3474,6 @@
                 <img src="images/customer-logos/Selected/Bosideng.png" alt="Bosideng">
             </div>
 
-        </div>
-    </section>
-
-    <!-- Solution Process Section -->
-    <section class="solution-process section" id="solution-process">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title reveal">实战破局路径：打通数据/AI落地闭环</h2>
-                <p class="section-subtitle reveal">仅需 <span class="highlight-time" style="color: #1e3a8a; font-weight: 700;">1–2 天</span>，把"推不动"变成可立项、可启动的落地资产清单</p>
-            </div>
-
-            <div class="solution-card glass-card reveal">
-                <div class="process-steps">
-                    <div class="process-step reveal stagger-1">
-                        <div class="step-badge">1</div>
-                        <h3 class="step-title">案例对齐</h3>
-                        <p class="step-desc">拆解标杆"样板间"，看清领先企业在做什么、先从哪里入手、自己当前处在哪个阶段。</p>
-                    </div>
-                    <div class="process-arrow reveal stagger-2">→</div>
-                    <div class="process-step reveal stagger-3">
-                        <div class="step-badge">2</div>
-                        <h3 class="step-title">机会优先级</h3>
-                        <p class="step-desc">5维度评估，锁定3-5个最高回报场景，不再撒胡椒面。</p>
-                    </div>
-                    <div class="process-arrow reveal stagger-4">→</div>
-                    <div class="process-step reveal stagger-5">
-                        <div class="step-badge">3</div>
-                        <h3 class="step-title">项目画布</h3>
-                        <p class="step-desc">工作坊共创，产出包含ROI的完整方案，可直接用于立项汇报。</p>
-                    </div>
-                    <div class="process-arrow reveal stagger-6">→</div>
-                    <div class="process-step reveal stagger-7">
-                        <div class="step-badge">4</div>
-                        <h3 class="step-title">路线图与机制</h3>
-                        <p class="step-desc">90天分阶段计划，责任人、验收标准写死，不是靠人盯人催办，而是靠机制推动落地。</p>
-                    </div>
-                    <div class="process-arrow reveal stagger-8">→</div>
-                    <div class="process-step reveal stagger-9">
-                        <div class="step-badge">5</div>
-                        <h3 class="step-title">第一周清单</h3>
-                        <p class="step-desc">带走可执行任务+工具包，下周即可启动。</p>
-                    </div>
-                </div>
-            </div>
-            <div class="diagnosis-link" style="margin-top: 2rem;">
-                <a href="#fit-check">适合什么团队？ →</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Who It's For Section -->
-    <section class="fit-check section" id="fit-check">
-        <div class="container">
-            <div class="fit-check-header">
-                <h2 class="fit-check-title">这场工作坊，不适合所有团队。</h2>
-                <p class="fit-check-intro">它不是一场科普性质的 AI 趋势分享，<br>而是为那些希望在 1–2 天内拉齐关键人、明确优先抓手，并启动 90 天落地闭环的团队设计的。</p>
-            </div>
-
-            <div class="fit-check-comparison">
-                <div class="fit-check-card fit-not">
-                    <h3 class="fit-card-title">不适合这样的需求</h3>
-                    <ul class="fit-card-list">
-                        <li>只想做一场偏趋势启发、热点普及型的 AI 讲座</li>
-                        <li>认为数据与 AI 只是 IT / 数据部门的事，不需要业务一号位与核心高层参与</li>
-                        <li>只关心 AI 能做什么，不关心谁来推进、如何落地、如何验收</li>
-                    </ul>
-                </div>
-
-                <div class="fit-check-card fit-yes">
-                    <h3 class="fit-card-title">更适合这样的团队</h3>
-                    <ul class="fit-card-list">
-                        <li>需要拉齐高层与核心管理者的方向共识</li>
-                        <li>希望明确第一优先场景，而不是同时铺开很多想法</li>
-                        <li>希望会后带走的不是一份 PPT，而是一套可推进、可汇报、可验收的行动闭环</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="fit-check-closing" style="max-width: 900px; margin: 0 auto;">
-                <p style="font-size: 0.95em;">如果您和核心团队已经厌倦了只谈概念，准备把分歧收敛成行动、把想法推进成闭环，我们值得聊一聊。</p>
-            </div>
         </div>
     </section>
 
@@ -4067,21 +4030,26 @@
 
             <!-- 2. 解决什么问题 -->
             <div class="svc-problem reveal">
-                <p class="svc-section-label">这项服务解决什么</p>
+                <h3 class="svc-problem-headline">企业做数据和AI，真正卡住的不是技术，是这三关</h3>
+                <p class="svc-problem-lead">只有跨越共识、路径与组织承接这三道管理壁垒，数据与AI才能真正从技术投入转化为经营产出。</p>
                 <div class="svc-problem-grid">
                     <div class="svc-problem-item">
                         <span class="svc-problem-tag">对不齐</span>
-                        <p>高层与核心团队对方向、优先级、ROI口径始终无法形成共识，战略会开成甩锅会。</p>
+                        <h4 class="svc-problem-subtitle">战略共识不清</h4>
+                        <p>管理层、业务、IT、数据团队对"AI先解决什么问题"理解并不一致。</p>
                     </div>
                     <div class="svc-problem-item">
                         <span class="svc-problem-tag">走不动</span>
-                        <p>首战场景迟迟锁定不了，跨部门壁垒把推进节奏拖死，没有人真正背责。</p>
+                        <h4 class="svc-problem-subtitle">缺少优先级与路径</h4>
+                        <p>方向看似明确，但第一步做什么、谁来做、做到什么标准，并不清楚。</p>
                     </div>
                     <div class="svc-problem-item">
                         <span class="svc-problem-tag">接不住</span>
-                        <p>方案出了会议室就失速，缺乏责权利机制与第一周可执行的启动动作。</p>
+                        <h4 class="svc-problem-subtitle">组织与治理接不住</h4>
+                        <p>试点也许能做起来，但难沉淀、难复制，项目仍依赖少数人硬推。</p>
                     </div>
                 </div>
+                <p class="svc-problem-conclusion">这场共创工作坊，不是再讲一遍AI能做什么，而是先把这三关拆开、对齐、收拢成第一条可推进的闭环。</p>
             </div>
 
             <!-- 3. 核心卖点前置 -->
@@ -4404,31 +4372,123 @@
                 </div>
             </div>
 
-            <!-- 4. 智能体架构 -->
+            <!-- 4. 四层智能体架构图 AgentArchDiagram -->
             <div class="svc3-architecture reveal">
                 <p class="svc-section-label">智能体架构</p>
-                <div class="svc3-arch-layers">
-                    <div class="arch-layer">
-                        <span class="layer-num">01</span>
-                        <h5>神经末梢层</h5>
-                        <p>从业务系统、人工录入、外部接口持续吸收数据，形成实时感知。</p>
+                <h3 class="agent-arch-headline">一个会感知、会判断、会行动、会进化的经营智能体。</h3>
+
+                <div class="agent-arch-diagram" aria-label="AI决策智能体四层架构图">
+
+                    <!-- 左侧：向上信号线 -->
+                    <div class="agent-arch-flow-left" aria-hidden="true">
+                        <div class="arch-flow-label arch-flow-label--up">↑ 信号</div>
+                        <div class="arch-flow-line arch-flow-line--up"></div>
                     </div>
-                    <div class="arch-layer">
-                        <span class="layer-num">02</span>
-                        <h5>中枢思考层</h5>
-                        <p>用已验证的判断规则、归因模型、标杆对比逻辑，自动完成异常识别与原因推断。</p>
+
+                    <!-- 中间：四层卡片 -->
+                    <div class="agent-arch-layers">
+
+                        <!-- 层 01：神经末梢层 -->
+                        <div class="agent-layer agent-layer--01">
+                            <div class="agent-layer-header">
+                                <span class="agent-layer-num">01</span>
+                                <span class="agent-layer-name">神经末梢层</span>
+                                <span class="agent-layer-en">PERCEPTION</span>
+                            </div>
+                            <p class="agent-layer-desc">实时感知人、货、场与外部环境的变化</p>
+                            <div class="agent-layer-tags">
+                                <span>人货场信号</span>
+                                <span>经营数据流</span>
+                                <span>外部因子</span>
+                                <span>实时感知</span>
+                            </div>
+                        </div>
+
+                        <!-- 连接器 01→02 -->
+                        <div class="agent-layer-connector" aria-hidden="true">
+                            <div class="connector-line"></div>
+                            <svg class="connector-arrow" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 7L1 1h8L5 7z" fill="rgba(1,75,148,0.55)"/>
+                            </svg>
+                        </div>
+
+                        <!-- 层 02：中枢思考层（核心焦点，青色强调） -->
+                        <div class="agent-layer agent-layer--02 agent-layer--focus">
+                            <div class="agent-layer-header">
+                                <span class="agent-layer-num">02</span>
+                                <span class="agent-layer-name">中枢思考层</span>
+                                <span class="agent-layer-en">INTELLIGENCE</span>
+                            </div>
+                            <p class="agent-layer-desc">把数据变成判断——异常归因、标杆比较、策略生成</p>
+                            <div class="agent-layer-tags">
+                                <span>异常归因</span>
+                                <span>穿透判断</span>
+                                <span>标杆比较</span>
+                                <span>决策引擎</span>
+                            </div>
+                        </div>
+
+                        <!-- 连接器 02→03 -->
+                        <div class="agent-layer-connector" aria-hidden="true">
+                            <div class="connector-line"></div>
+                            <svg class="connector-arrow" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 7L1 1h8L5 7z" fill="rgba(1,75,148,0.55)"/>
+                            </svg>
+                        </div>
+
+                        <!-- 层 03：动作下发层 -->
+                        <div class="agent-layer agent-layer--03">
+                            <div class="agent-layer-header">
+                                <span class="agent-layer-num">03</span>
+                                <span class="agent-layer-name">动作下发层</span>
+                                <span class="agent-layer-en">ACTION</span>
+                            </div>
+                            <p class="agent-layer-desc">把结论变成明确动作，按角色定向推送</p>
+                            <div class="agent-layer-tags">
+                                <span>任务下发</span>
+                                <span>角色分发</span>
+                                <span>优先级判断</span>
+                                <span>责任到人</span>
+                            </div>
+                        </div>
+
+                        <!-- 连接器 03→04 -->
+                        <div class="agent-layer-connector" aria-hidden="true">
+                            <div class="connector-line"></div>
+                            <svg class="connector-arrow" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 7L1 1h8L5 7z" fill="rgba(1,75,148,0.55)"/>
+                            </svg>
+                        </div>
+
+                        <!-- 层 04：记忆进化层（闭环回路起点，底部特殊处理） -->
+                        <div class="agent-layer agent-layer--04 agent-layer--memory">
+                            <div class="agent-layer-header">
+                                <span class="agent-layer-num">04</span>
+                                <span class="agent-layer-name">记忆进化层</span>
+                                <span class="agent-layer-en">EVOLUTION</span>
+                            </div>
+                            <p class="agent-layer-desc">沉淀问题、行动与结果，形成组织记忆，让系统越用越准</p>
+                            <div class="agent-layer-tags">
+                                <span>结果回收</span>
+                                <span>ROI验证</span>
+                                <span>经营记忆</span>
+                                <span>持续进化</span>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="arch-layer">
-                        <span class="layer-num">03</span>
-                        <h5>动作下发层</h5>
-                        <p>根据角色权限与业务场景，定向推送建议、生成任务、触发预警。</p>
+
+                    <!-- 右侧：向下指令线 + 闭环回路 -->
+                    <div class="agent-arch-flow-right" aria-hidden="true">
+                        <div class="arch-flow-label arch-flow-label--down">↓ 指令</div>
+                        <div class="arch-flow-line arch-flow-line--down"></div>
+                        <div class="arch-flow-loop-label">↺ 回路</div>
                     </div>
-                    <div class="arch-layer">
-                        <span class="layer-num">04</span>
-                        <h5>记忆进化层</h5>
-                        <p>回收执行结果，持续校准判断模型，让智能体越用越准。</p>
-                    </div>
+
                 </div>
+
+                <!-- 压轴句 -->
+                <p class="agent-arch-tagline">不是再建一个系统——而是让判断、动作和记忆，开始自动运转。</p>
             </div>
 
             <!-- 5. 工作机制 -->
@@ -4683,40 +4743,56 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <!-- 第一层：主收口区 -->
+            <div class="footer-cta-section">
+                <h3 class="footer-cta-title">不急着立项，先把问题拆对。</h3>
+                <p class="footer-cta-desc">15分钟诊断对话，先判断首战场景、推进复杂度，以及组织是否接得住。</p>
+                <div class="footer-qr-wrapper">
+                    <div class="footer-qr-content">
+                        <img src="./images/wechat-qr-brand.png?v=2" alt="Pallas Studio 微信二维码" class="footer-qr-image">
+                        <div class="footer-qr-text">
+                            <p class="footer-qr-title">扫码预约 15 分钟诊断对话</p>
+                            <p class="footer-qr-hint">添加后备注「15分钟诊断」，优先安排。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第二层：辅助信息区 -->
             <div class="footer-content">
                 <div class="footer-col">
-                    <h4 class="footer-title">快速链接</h4>
+                    <h4 class="footer-title">快速入口</h4>
                     <ul class="footer-links">
-                        <li><a href="#diagnosis" class="nav-link">破局路径</a></li>
-                        <li><a href="#cases" class="nav-link">标杆案例</a></li>
-                        <li><a href="#courses" class="nav-link">工作坊设计</a></li>
-                        <li><a href="#about" class="nav-link">为什么是我</a></li>
+                        <li><a href="#services" class="footer-link">三种服务</a></li>
+                        <li><a href="#cases" class="footer-link">标杆案例</a></li>
+                        <li><a href="#about" class="footer-link">为什么是我</a></li>
+                        <li><a href="#interactive" class="footer-link">预约15分钟诊断对话</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4 class="footer-title">联系方式</h4>
                     <ul class="footer-links">
-                        <li>微信: 扫描下方二维码</li>
+                        <li class="footer-text">微信：扫码添加</li>
+                        <li class="footer-text">邮箱：lihuaming@gmail.com</li>
+                        <li class="footer-text">工作日优先回复</li>
                     </ul>
-                    <div style="margin-top: 15px; text-align: center;">
-                        <img src="./images/wechat-qr-brand.png?v=2" alt="Pallas Studio 微信二维码" style="width: 120px; height: 120px; border-radius: 8px;">
-                    </div>
                 </div>
 
                 <div class="footer-col">
-                    <h4 class="footer-title">交付资产</h4>
+                    <h4 class="footer-title">诊断对话会聚焦</h4>
                     <ul class="footer-links">
-                        <li style="color: #9CA3AF; cursor: default;">AI项目画布</li>
-                        <li style="color: #9CA3AF; cursor: default;">90天行动路线图</li>
-                        <li style="color: #9CA3AF; cursor: default;">ROI测算结构</li>
+                        <li class="footer-text">首战场景怎么定</li>
+                        <li class="footer-text">90天闭环能否跑通</li>
+                        <li class="footer-text">当前卡点属于哪一关</li>
+                        <li class="footer-text">是否适合直接进入下一阶段</li>
                     </ul>
-                    <p style="font-size: 12px; color: #6B7280; margin-top: 12px; line-height: 1.6;">*工作坊交付资产，诊断对话中可了解详情</p>
                 </div>
             </div>
 
+            <!-- 第三层：版权区 -->
             <div class="footer-bottom">
-                <p>Copyright &copy; <span id="currentYear"></span> Pallas Studio All Rights Reserved | 沪ICP备2026008300号-1 | <a href="#" id="privacyPolicyLink" style="color: inherit; text-decoration: underline;">隐私政策</a></p>
+                <p>Copyright © 2026 Pallas Studio All Rights Reserved ｜ 沪ICP备2026008300号-1 ｜ <a href="#" id="privacyPolicyLink" class="footer-privacy-link">隐私政策</a></p>
             </div>
         </div>
     </footer>
